@@ -1,4 +1,5 @@
 #include "Labirinto.h"
+#include "Percurso.h"
 
 #include <stdio.h>
 #include <stdlib.h>

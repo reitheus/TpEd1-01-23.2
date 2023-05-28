@@ -6,6 +6,7 @@
 
 struct percurso{
     Pos **trajeto;
+    int n;
 };
 
 //alocação de percuso e posicao
@@ -16,7 +17,7 @@ Per* alocaLab(int n){
     for (int i = 0; i < n; i++){
         newpos->trajeto[i] = alocaPos();
     }
-    
+    newpos->n=n;
     return newpos; 
 }
 

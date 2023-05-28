@@ -47,6 +47,8 @@ void leEscolha(char *pOpc){
 //acha a saida do labirinto
 void achaSaida(Lab *plab){
     //utilizar recursão
+    //teste
+    
 }
 
 //imprime o labirinto

@@ -9,7 +9,7 @@ struct labirinto{
     int tamL;
     int tamC;
 };
-henrrique
+
 //alloca o labirtinto
 Lab* alocaLab(int n,int m){
     //n = linhas; m = colunas

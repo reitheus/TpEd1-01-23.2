@@ -7,5 +7,7 @@ int main(){
     leLabirinto(&linhas,&colunas);
     alocaLab(linhas, colunas);
     leEscolha(&opcao);
+
+    
     return 0;
 }

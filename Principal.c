@@ -7,8 +7,7 @@ int main(){
     Lab *labirinto;
     
     leLabirinto(labirinto, &opcao);
-    //alocaLab(linhas, colunas);
-    leEscolha(&opcao);
+
 
     
     return 0;

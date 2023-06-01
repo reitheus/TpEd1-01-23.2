@@ -13,10 +13,12 @@ struct labirinto{
 //alloca o labirtinto
 Lab* alocaLab(int n,int m){
     //n = linhas; m = colunas
-    Lab *newlab = (Lab*) malloc (m * sizeof(Lab));
+    Lab *newlab = (Lab*) malloc (sizeof(Lab));//Alloca um labirinto
+    
+    newlab->mapa = (char*)malloc(m * sizeof(char*));
     for (int i = 0; i < m; i++)
     {
-        newlab->mapa=(Lab*) malloc (n * sizeof(Lab));
+        newlab->mapa=(char) malloc (n * sizeof(char));
     }
     newlab->tamL=n;
     newlab->tamC=m;
@@ -25,6 +27,7 @@ Lab* alocaLab(int n,int m){
 
 //desaloca o labirinto
 void desalocaLab(Lab **plab){
+     
     for (int i = 0; i < (*plab)->tamL; i++)
     {
         free((*plab)->mapa[i]);
@@ -35,14 +38,19 @@ void desalocaLab(Lab **plab){
 }
 
 //le as entradas para o labirinto
-void leLabirinto(int *L,int *C){
+void leLabirinto(Lab *plab, char *opcao){
+    char L, C;
     scanf("%d %d",L,C);
+    scanf("%c", saida);
+    
+    plab = alocaLab(L, C)
+    
+    
+    
+    
 }
 
-//faz a leitura da opção de escolha
-void leEscolha(char *pOpc){
-    scanf("%c",pOpc);
-}
+
 
 //acha a saida do labirinto
 void achaSaida(Lab *plab){

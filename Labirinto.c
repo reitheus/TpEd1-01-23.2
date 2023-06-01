@@ -50,12 +50,8 @@ void leLabirinto(Lab *plab, char *opcao){
             scanf("%c", plab->mapa[i][j]);
         
         }
-    
-    
-    
+
     }
-    
-    
     
     
 }

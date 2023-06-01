@@ -6,8 +6,8 @@ int main(){
     char opcao;
     Lab *labirinto;
     
-    leLabirinto(&linhas,&colunas);
-    alocaLab(linhas, colunas);
+    leLabirinto(labirinto, &opcao);
+    //alocaLab(linhas, colunas);
     leEscolha(&opcao);
 
     

@@ -41,7 +41,7 @@ void desalocaLab(Lab **plab){
 void leLabirinto(Lab *plab, char *opcao){
     char L, C;
     scanf("%d %d",L,C);
-    scanf("%c", saida);
+    scanf("%c", opcao);
     
     plab = alocaLab(L, C);
     

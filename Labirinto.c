@@ -46,7 +46,10 @@ void leLabirinto(Lab *plab, char *opcao){
     plab = alocaLab(L, C);
     
     for(int i = 0; i < C; i++){
-    
+        for(int j = 0; j < L; j++){
+        
+        
+        }
     
     
     

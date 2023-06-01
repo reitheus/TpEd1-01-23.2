@@ -43,7 +43,14 @@ void leLabirinto(Lab *plab, char *opcao){
     scanf("%d %d",L,C);
     scanf("%c", saida);
     
-    plab = alocaLab(L, C)
+    plab = alocaLab(L, C);
+    
+    for(int i = 0; i < C; i++){
+    
+    
+    
+    
+    }
     
     
     

@@ -10,7 +10,7 @@ int main(){
     linhas = labirinto->tamL;
     colunas = labirinto->tamC;
     
-    printLab(labirinto, L, C);
+    printLab(labirinto);
 
     desalocaLab(labirinto);
     return 0;

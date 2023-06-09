@@ -39,7 +39,7 @@ void desalocaLab(Lab **plab){
 
 //le as entradas para o labirinto
 void leLabirinto(Lab *plab, char *opcao){
-    char L, C;
+    int L, C;
     scanf("%d %d", &L, &C);
     scanf("%c", opcao);
     
@@ -56,7 +56,7 @@ void leLabirinto(Lab *plab, char *opcao){
     
 }
 
-void printLab(Lab *plab){// função para testes posteriormente pode ser apagada
+void printLab(Lab *pLab){// função para testes posteriormente pode ser apagada
 
    for(int i = 0; i < pLab->tamL; i++){
         for(int j = 0; j < pLab->tamC; j++){

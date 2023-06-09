@@ -7,11 +7,11 @@ int main(){
     Lab *labirinto;
     
     leLabirinto(labirinto, &opcao);
-    linhas = labirinto->tamL;
-    colunas = labirinto->tamC;
+    linhas = labirinto.tamL;
+    colunas = labirinto.tamC;
     
     printLab(labirinto);
 
-    desalocaLab(labirinto);
+    desalocaLab(&labirinto);
     return 0;
 }

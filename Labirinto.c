@@ -14,11 +14,24 @@ struct labirinto{
 Lab* alocaLab(int L,int C){
     //L = linhas; C = colunas
     Lab *newlab = (Lab*) malloc (sizeof(Lab));//Alloca um labirinto
+    if(newlab == NULL){
+        printf("Memoria insuficiente.\n");
+        exit(1);
+    }
     
     newlab->mapa = (char**)malloc(L * sizeof(char*));
+    if(newlab->mapa == NULL){
+        printf("Memoria insuficiente.\n");
+        exit(1);
+    }
+    
     for (int i = 0; i < L; i++)
     {
         newlab->mapa[i] = (char*)malloc(C * sizeof(char));
+        if(newlab->mapa[i] == NULL){
+            printf("Memoria insuficiente.\n");
+            exit(1);
+        }
     }
     newlab->tamL=L;
     newlab->tamC=C;

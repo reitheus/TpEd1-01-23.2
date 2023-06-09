@@ -15,10 +15,10 @@ Lab* alocaLab(int L,int C){
     //L = linhas; C = colunas
     Lab *newlab = (Lab*) malloc (sizeof(Lab));//Alloca um labirinto
     
-    newlab->mapa = (char*)malloc(L * sizeof(char*));
+    newlab->mapa = (char**)malloc(L * sizeof(char*));
     for (int i = 0; i < L; i++)
     {
-        newlab->mapa=(char) malloc (C * sizeof(char));
+        newlab->mapa=(char*) malloc (C * sizeof(char));
     }
     newlab->tamL=L;
     newlab->tamC=C;
@@ -40,13 +40,13 @@ void desalocaLab(Lab **plab){
 //le as entradas para o labirinto
 void leLabirinto(Lab *plab, char *opcao){
     char L, C;
-    scanf("%d %d",L,C);
+    scanf("%d %d", &L, &C);
     scanf("%c", opcao);
     
     plab = alocaLab(L, C);
     
-    for(int i = 0; i < C; i++){
-        for(int j = 0; j < L; j++){
+    for(int i = 0; i < L; i++){
+        for(int j = 0; j < C; j++){
             scanf("%c", &plab->mapa[i][j]);
         
         }
@@ -56,10 +56,10 @@ void leLabirinto(Lab *plab, char *opcao){
     
 }
 
-void printLab(Lab *plab, int L, int C){// função para testes posteriormente pode ser apagada
+void printLab(Lab *plab){// função para testes posteriormente pode ser apagada
 
-   for(int i = 0; i < C; i++){
-        for(int j = 0; j < L; j++){
+   for(int i = 0; i < pLab->tamL; i++){
+        for(int j = 0; j < pLab->tamC; j++){
             printf("%c", plab->mapa[i][j]);
         
         }

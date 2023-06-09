@@ -7,9 +7,9 @@ Lab* alocaLab(int ,int );
 
 void desalocaLab(Lab**);
 
-void leLabirinto(Lab* , char* );
+void leLabirinto(Lab *plab, char *opcao);
 
-void leEscolha(char* );
+void printLab(Lab *plab);
 
 void achaSaida(Lab*);
 

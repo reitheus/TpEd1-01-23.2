@@ -2,18 +2,16 @@
 
 
 int main(){
-    int linhas, colunas;
+   // int linhas, colunas;
     char opcao;
     Lab *labirinto;
+
     
-    scanf("%i %i", &linhas, &columas);
-    
-    
-    //leLabirinto(labirinto, &opcao);
-     labirinto = alocaLab(linhas, colunas);
+    leLabirinto(labirinto, &opcao);
+   
     
     //printLab(labirinto);
 
-    //desalocaLab(&labirinto);
+    desalocaLab(&labirinto);
     return 0;
 }

@@ -47,7 +47,7 @@ void leLabirinto(Lab *plab, char *opcao){
     
     for(int i = 0; i < C; i++){
         for(int j = 0; j < L; j++){
-            scanf("%c", plab->mapa[i][j]);
+            scanf("%c", &plab->mapa[i][j]);
         
         }
 
@@ -56,7 +56,19 @@ void leLabirinto(Lab *plab, char *opcao){
     
 }
 
+void printLab(Lab *plab, int L, int C){
 
+   for(int i = 0; i < C; i++){
+        for(int j = 0; j < L; j++){
+            printf("%c", plab->mapa[i][j]);
+        
+        }
+
+    }
+
+
+
+}
 
 //acha a saida do labirinto
 void achaSaida(Lab *plab){

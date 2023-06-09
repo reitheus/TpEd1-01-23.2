@@ -13,20 +13,20 @@ struct labirinto{
 //alloca o labirtinto
 Lab* alocaLab(int L,int C){
     //L = linhas; C = colunas
-    Lab *newlab = (Lab*) malloc (sizeof(Lab));//Alloca um labirinto
+    Lab *newlab = (Lab*)malloc(sizeof(Lab) * 1);//Alloca um labirinto
     if(newlab == NULL){
         printf("Memoria insuficiente.\n");
         exit(1);
     }
-    
+    printf("");
     newlab->mapa = (char**)malloc(L * sizeof(char*));
     if(newlab->mapa == NULL){
         printf("Memoria insuficiente.\n");
         exit(1);
     }
     
-    for (int i = 0; i < L; i++)
-    {
+    for (int i = 0; i < L; i++){
+        
         newlab->mapa[i] = (char*)malloc(C * sizeof(char));
         if(newlab->mapa[i] == NULL){
             printf("Memoria insuficiente.\n");
@@ -55,8 +55,10 @@ void leLabirinto(Lab *plab, char *opcao){
     int L, C;
     scanf("%d %d", &L, &C);
     scanf("%c", opcao);
-    
+    printf("oioi");
     plab = alocaLab(L, C);
+    
+    printf("oioi 222");
     
     for(int i = 0; i < L; i++){
         for(int j = 0; j < C; j++){

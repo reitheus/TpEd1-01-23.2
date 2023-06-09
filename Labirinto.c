@@ -18,7 +18,7 @@ Lab* alocaLab(int L,int C){
     newlab->mapa = (char**)malloc(L * sizeof(char*));
     for (int i = 0; i < L; i++)
     {
-        newlab->mapa=(char*) malloc (C * sizeof(char));
+        newlab->mapa[i] = (char*)malloc(C * sizeof(char));
     }
     newlab->tamL=L;
     newlab->tamC=C;
@@ -26,14 +26,14 @@ Lab* alocaLab(int L,int C){
 }
 
 //desaloca o labirinto
-void desalocaLab(Lab **plab){
+void desalocaLab(Lab **pLab){
      
-    for (int i = 0; i < (*plab)->tamL; i++)
+    for (int i = 0; i < (*pLab)->tamL; i++)
     {
-        free((*plab)->mapa[i]);
+        free((*pLab)->mapa[i]);
     }
-    free((*plab)->mapa);
-    free(plab);
+    free((*pLab)->mapa);
+    free(pLab);
     
 }
 
@@ -60,7 +60,7 @@ void printLab(Lab *pLab){// função para testes posteriormente pode ser apagada
 
    for(int i = 0; i < pLab->tamL; i++){
         for(int j = 0; j < pLab->tamC; j++){
-            printf("%c", plab->mapa[i][j]);
+            printf("%c", pLab->mapa[i][j]);
         
         }
 
@@ -71,14 +71,14 @@ void printLab(Lab *pLab){// função para testes posteriormente pode ser apagada
 }
 
 //acha a saida do labirinto
-void achaSaida(Lab *plab){
+void achaSaida(Lab *pLab){
     //utilizar recursão
     //teste
     
 }
 
 //imprime o labirinto
-void imprimePercursoNoLabirinto(Lab *plab){
+void imprimePercursoNoLabirinto(Lab *pLab){
     
     
 }

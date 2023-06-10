@@ -73,7 +73,7 @@ Lab* leLabirinto(char *opcao){
     for(int i = 0; i < L ; i++){
        
         //scanf("%c", &(plab->mapa[i][j]));
-        fgets(&(plab->mapa[i]), C ,stdin);
+        fgets( plab->mapa[i] , C ,stdin);
         
 
     }

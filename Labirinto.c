@@ -62,7 +62,7 @@ void leLabirinto(Lab *plab, char *opcao){
     
     for(int i = 0; i < L; i++){
         for(int j = 0; j < C; j++){
-            scanf("%c", plab->mapa[i][j]);
+            scanf("%c", &(plab->mapa[i][j]));
         
         }
 

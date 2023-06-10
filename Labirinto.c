@@ -18,17 +18,17 @@ Lab* alocaLab(int L,int C){
         printf("Memoria insuficiente.\n");
         exit(1);
     }
-    printf("");
-    newlab->mapa = (char**)malloc(L * sizeof(char*));
-    if(newlab->mapa == NULL){
+   
+    (*newlab).mapa = (char**)malloc(L * sizeof(char*));
+    if((*newlab).mapa  == NULL){
         printf("Memoria insuficiente.\n");
         exit(1);
     }
     
     for (int i = 0; i < L; i++){
         
-        newlab->mapa[i] = (char*)malloc(C * sizeof(char));
-        if(newlab->mapa[i] == NULL){
+        (*newlab).mapa[i] = (char*)malloc(C * sizeof(char));
+        if((*newlab).mapa[i] == NULL){
             printf("Memoria insuficiente.\n");
             exit(1);
         }

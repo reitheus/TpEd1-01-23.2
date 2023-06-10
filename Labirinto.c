@@ -95,7 +95,7 @@ void printLab(Lab *pLab){// função para testes posteriormente pode ser apagada
         }
        
     }
-    printf("%c", pLab->mapa[0][0]);
+    
   //  for(int i = 0; i < pLab->tamC; i++){
         
        // printf("%c", pLab->mapa[pLab->tamL - 1][i]);

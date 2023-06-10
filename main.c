@@ -7,7 +7,7 @@ int main(){
     Lab *labirinto;
 
     
-    leLabirinto(labirinto, &opcao);
+    labirinto = leLabirinto(&opcao);
    
     
     //printLab(labirinto);

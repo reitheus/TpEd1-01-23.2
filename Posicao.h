@@ -7,7 +7,7 @@ Pos* alocaPos();
 
 void desalocaPos(Pos** );
 
-updatePos( Pos* , int , int );
+void updatePos( Pos* , int , int );
 
 
 #endif //posição.h

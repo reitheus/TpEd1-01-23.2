@@ -57,7 +57,8 @@ Lab* leLabirinto(char *opcao){
     scanf("%d %d", &L, &C);
     //L++;
     scanf("%c", opcao);
-    scanf("%c", opcao);
+    printf("\n");
+    //scanf("%c", opcao);
     plab = alocaLab(L, C);
     
   
@@ -70,10 +71,10 @@ Lab* leLabirinto(char *opcao){
 
     }
     
-    for(int i = 0; i < C; i++){
+   // for(int i = 0; i < C; i++){
         
-      scanf("%c", &(plab->mapa[L - 1][i]));
-    }
+     // scanf("%c", &(plab->mapa[L - 1][i]));
+   // }
     
   
     return plab;

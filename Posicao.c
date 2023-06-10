@@ -20,3 +20,10 @@ Pos* alocaPos(){
 void desalocaPos(Pos **ppos){
     free(*ppos);
 }
+
+
+void updatePos( Pos *posicao, int x, int y){
+    posicao->x = x;
+    posicao->y = y;
+
+}

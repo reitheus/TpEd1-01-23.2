@@ -54,13 +54,13 @@ void desalocaLab(Lab **pLab){
 Lab* leLabirinto(char *opcao){
     int L, C;
     Lab *plab;
+    char lixo;
     scanf("%d %d", &L, &C);
     //L++;
+    //scanf("%c", &lixo);
     scanf("%c", opcao);
-    scanf("%c", opcao);
-    scanf("%c", opcao);
-    //printf("\n");
-    //scanf("%c", opcao);
+    scanf("%c", &lixo);
+
     plab = alocaLab(L, C);
     
   
@@ -73,10 +73,10 @@ Lab* leLabirinto(char *opcao){
 
     }
     
-    for(int i = 0; i < C; i++){
+   // for(int i = 0; i < C; i++){
         
-      scanf("%c", &(plab->mapa[L - 1][i]));
-    }
+     // scanf("%c", &(plab->mapa[L - 1][i]));
+   // }
     
   
     return plab;

@@ -69,6 +69,7 @@ Lab* leLabirinto(char *opcao){
         }
 
     }
+    fgets(&(plab->mapa[L - 1][0]), C,stdin);
     
     return plab;
     
@@ -84,8 +85,8 @@ void printLab(Lab *pLab){// função para testes posteriormente pode ser apagada
        
     }
 
-    printf("%c",pLab->tamL);
-    printf("%c",pLab->tamC);
+   // printf("%c",pLab->tamL);
+   // printf("%c",pLab->tamC);
     
 
 }

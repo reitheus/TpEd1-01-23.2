@@ -13,35 +13,35 @@ struct labirinto{
 //alloca o labirtinto
 Lab* alocaLab(int L,int C){
     //L = linhas; C = colunas
-    Lab *newlab = (Lab*)malloc(sizeof(Lab) * 1);//Alloca um labirinto
+    Lab *newlab = (Lab*)malloc(sizeof(Lab) );//Alloca um labirinto
     if(newlab == NULL){
         printf("Memoria insuficiente.\n");
         exit(1);
     }
    
-    (*newlab).mapa = (char**)malloc(15 * sizeof(char*));
+    (*newlab).mapa = (char**)malloc(L * sizeof(char*));
     if((*newlab).mapa  == NULL){
         printf("Memoria insuficiente.\n");
         exit(1);
     }
     
-    for (int i = 0; i < 15; i++){
+    for (int i = 0; i < L; i++){
         
-        (*newlab).mapa[i] = (char*)malloc(15 * sizeof(char));
+        (*newlab).mapa[i] = (char*)malloc(C * sizeof(char));
         if((*newlab).mapa[i] == NULL){
             printf("Memoria insuficiente.\n");
             exit(1);
         }
     }
-    newlab->tamL=15;
-    newlab->tamC=15;
+    newlab->tamL = L;
+    newlab->tamC = C;
     return newlab; 
 }
 
 //desaloca o labirinto
 void desalocaLab(Lab **pLab){
     
-    for (int i = 0; i < 15; i++){
+    for (int i = 0; i <  (*pLab)->tamL; i++){
         
         free((*pLab)->mapa[i]);
     }
@@ -51,23 +51,25 @@ void desalocaLab(Lab **pLab){
 }
 
 //le as entradas para o labirinto
-void leLabirinto(Lab *plab, char *opcao){
+Lab* leLabirinto(char *opcao){
     int L, C;
+    Lab *plab;
     scanf("%d %d", &L, &C);
     scanf("%c", opcao);
-    printf("oioi");
+    //printf("oioi");
     plab = alocaLab(L, C);
     
     printf("oioi 222");
     
-    for(int i = 0; i < 15; i++){
-        for(int j = 0; j < 15; j++){
+    for(int i = 0; i < L; i++){
+        for(int j = 0; j < C; j++){
             scanf("%c", &(plab->mapa[i][j]));
         
         }
 
     }
     
+    return plab;
     
 }
 

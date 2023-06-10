@@ -19,29 +19,29 @@ Lab* alocaLab(int L,int C){
         exit(1);
     }
    
-    (*newlab).mapa = (char**)malloc(L * sizeof(char*));
+    (*newlab).mapa = (char**)malloc(15 * sizeof(char*));
     if((*newlab).mapa  == NULL){
         printf("Memoria insuficiente.\n");
         exit(1);
     }
     
-    for (int i = 0; i < L; i++){
+    for (int i = 0; i < 15; i++){
         
-        (*newlab).mapa[i] = (char*)malloc(C * sizeof(char));
+        (*newlab).mapa[i] = (char*)malloc(15 * sizeof(char));
         if((*newlab).mapa[i] == NULL){
             printf("Memoria insuficiente.\n");
             exit(1);
         }
     }
-    newlab->tamL=L;
-    newlab->tamC=C;
+    newlab->tamL=15;
+    newlab->tamC=15;
     return newlab; 
 }
 
 //desaloca o labirinto
 void desalocaLab(Lab **pLab){
     
-    for (int i = 0; i < (*pLab)->tamL; i++){
+    for (int i = 0; i < 15; i++){
         
         free((*pLab)->mapa[i]);
     }
@@ -60,8 +60,8 @@ void leLabirinto(Lab *plab, char *opcao){
     
     printf("oioi 222");
     
-    for(int i = 0; i < L; i++){
-        for(int j = 0; j < C; j++){
+    for(int i = 0; i < 15; i++){
+        for(int j = 0; j < 15; j++){
             scanf("%c", &(plab->mapa[i][j]));
         
         }

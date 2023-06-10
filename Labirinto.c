@@ -80,7 +80,8 @@ void printLab(Lab *pLab){// função para testes posteriormente pode ser apagada
             printf("%c", pLab->mapa[i][j]);
         
         }
-
+        printf("\n"); 
+       
     }
 
 

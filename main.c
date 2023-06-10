@@ -12,6 +12,6 @@ int main(){
     
     //printLab(labirinto);
 
-    desalocaLab(labirinto);
+    desalocaLab(&labirinto);
     return 0;
 }

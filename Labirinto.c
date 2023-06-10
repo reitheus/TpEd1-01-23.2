@@ -61,7 +61,7 @@ Lab* leLabirinto(char *opcao){
     
     printf("oioi 222");
     
-    for(int i = 0; i < L; i++){
+    for(int i = 0; i < L + 1; i++){
         for(int j = 0; j < C; j++){
             scanf("%c", &(plab->mapa[i][j]));
         
@@ -80,7 +80,7 @@ void printLab(Lab *pLab){// função para testes posteriormente pode ser apagada
             printf("%c", pLab->mapa[i][j]);
         
         }
-       // printf("\n"); 
+       
        
     }
 

@@ -46,7 +46,7 @@ void desalocaLab(Lab **pLab){
         free((*pLab)->mapa[i]);
     }
     free((*pLab)->mapa);
-    free(pLab);
+    free(*pLab);
     
 }
 

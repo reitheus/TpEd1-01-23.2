@@ -57,7 +57,7 @@ Lab* leLabirinto(char *opcao){
     char lixo;
     scanf("%d %d", &L, &C);
     //L++;
-    //scanf("%c", &lixo);
+    scanf("%c", &lixo);
     scanf("%c", opcao);
     scanf("%c", &lixo);
 

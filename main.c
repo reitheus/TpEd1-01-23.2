@@ -10,7 +10,7 @@ int main(){
     labirinto = leLabirinto(&opcao);
    
     
-    //printLab(labirinto);
+    printLab(labirinto);
 
     desalocaLab(&labirinto);
     return 0;

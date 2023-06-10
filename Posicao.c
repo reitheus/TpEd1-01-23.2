@@ -9,7 +9,7 @@ struct posicao{
     int y;
 };
 
-Pos* alocaLab(){
+Pos* alocaPos(){
 
     Pos *newpos = (Pos*) malloc (sizeof(Pos));
 
@@ -17,6 +17,6 @@ Pos* alocaLab(){
 }
 
 //desaloca o labirinto
-void desalocaLab(Pos **ppos){
+void desalocaPos(Pos **ppos){
     free(*ppos);
 }

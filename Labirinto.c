@@ -73,10 +73,10 @@ Lab* leLabirinto(char *opcao){
 
     }
     
-   // for(int i = 0; i < C; i++){
+    for(int i = 0; i < C; i++){
         
-     // scanf("%c", &(plab->mapa[L - 1][i]));
-   // }
+      scanf("%c", &(plab->mapa[L - 1][i]));
+    }
     
   
     return plab;

@@ -61,25 +61,16 @@ Lab* leLabirinto(char *opcao){
     plab = alocaLab(L, C);
     
   
-    /*
-    for(int i = 0; i < L ; i++){
-        for(int j = 0; j < C; j++){
-            //scanf("%c", &(plab->mapa[i][j]));
-            fgets(&(plab->mapa[i][j]), L * C,stdin);
-        }
-
-    }*/
     
     for(int i = 0; i < L ; i++){
-       
-        //scanf("%c", &(plab->mapa[i][j]));
-        fgets( plab->mapa[i] , C ,stdin);
-        
+        for(int j = 0; j < C; j++){
+            scanf("%c", &(plab->mapa[i][j]));
+            
+        }
 
     }
     
-    //fgets(&(plab->mapa[L - 1][0]), C,stdin);
-    
+  
     return plab;
     
 }
@@ -92,6 +83,11 @@ void printLab(Lab *pLab){// função para testes posteriormente pode ser apagada
         
         }
        
+    }
+    
+    for(int i = 0; i < pLab->tamC; i++){
+        
+        printf("%c", pLab->mapa[pLab->tamL - 1][i]);
     }
 
    // printf("%c",pLab->tamL);

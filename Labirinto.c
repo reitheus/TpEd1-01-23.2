@@ -53,14 +53,16 @@ void desalocaLab(Lab **pLab){
 //le as entradas para o labirinto
 Lab* leLabirinto(char *opcao){
     int L, C;
+    
     Lab *plab;
     char lixo;
     scanf("%d %d", &L, &C);
+    C += L-1;
     //L++;
     scanf("%c", &lixo);
     scanf("%c", opcao);
     scanf("%c", &lixo);
-    scanf("%c", &lixo);
+   // scanf("%c", &lixo);
 
     plab = alocaLab(L, C);
     

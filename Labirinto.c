@@ -55,12 +55,12 @@ Lab* leLabirinto(char *opcao){
     int L, C;
     Lab *plab;
     scanf("%d %d", &L, &C);
-    L++;
+    //L++;
     scanf("%c", opcao);
-    //printf("oioi");
+    
     plab = alocaLab(L, C);
     
-    printf("oioi 222");
+  
     
     for(int i = 0; i < L ; i++){
         for(int j = 0; j < C; j++){
@@ -82,10 +82,11 @@ void printLab(Lab *pLab){// função para testes posteriormente pode ser apagada
         
         }
        
-       
     }
 
-
+    printf("%c",pLab->tamL);
+    printf("%c",pLab->tamC);
+    
 
 }
 

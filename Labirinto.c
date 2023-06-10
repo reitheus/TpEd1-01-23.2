@@ -98,12 +98,14 @@ void printLab(Lab *pLab){// função para testes posteriormente pode ser apagada
 //acha a saida do labirinto
 void achaSaida(Lab *pLab){
     
-    //Pos *saida;
+    Pos *saida;
+    saida = alocaPos();
+    updatePos( saida, pLab->tamC, pLab->tamL-1);
     
     
     //utilizar recursão
     //teste
-    
+    desalocaPos(&saida);
 }
 
 //imprime o labirinto

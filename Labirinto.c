@@ -105,7 +105,7 @@ void posMause(Labirinto* pLab, Posicao* mause)
         {
             if (pLab->mapa[i][j] == 'M' || pLab->mapa[i][j] == 'm')
             {
-                printf("\n \n posição mause L %i C %i \n \n", i, j);
+                printf("\n posição mause L %i C %i \n", i, j);
                 updatePos(mause, i, j);
             }
         }
@@ -115,60 +115,62 @@ void posMause(Labirinto* pLab, Posicao* mause)
 void achaSaida(Labirinto* pLab, Posicao* saida, Posicao* mause, Percurso* pTra, int i)
 {
     printf("posição atual L %i C %i \n", valueY(mause), valueX(mause));
-    
-    if(valueY(mause) == valueY(saida) && valueX(mause) == valueX(saida)){
-        printf("achou a saida");
-        printf("coordenadas atuais L %i C %i", valueY(mause), valueX(mause));    
-        
+
+    if (valueY(mause) == valueY(saida) && valueX(mause) == valueX(saida))
+    {
+        printf("achou a saida\n");
+        printLab(pLab);
+        printf("coordenadas atuais L %i C %i \n", valueY(mause), valueX(mause));
+
         return;
     }
+    else
+    {
+        do
+        {
+            if (valueY(mause) - 1 > 0 && valueY(mause) - 1 < pLab->tamL && pLab->mapa[valueY(mause) - 1][valueX(mause)] == ' ')
+            {
+                pLab->mapa[valueY(mause)][valueX(mause)] = 'b';
+                updateTra(pTra, i, valueY(mause) - 1, valueX(mause));
+                updatePos(mause, valueY(mause) - 1, valueX(mause));
+                i = i + 1;
+                achaSaida(pLab, saida, mause, pTra, i);
+                updatePos(mause, valueY(mause) + 1, valueX(mause));
+                pLab->mapa[valueY(mause)][valueX(mause)] = ' ';
+            }
 
-    //teste para cima
-    //se estiver dentro do labirinto e se espaço vazio
-    if(valueY(mause) - 1 > 0 && valueY(mause) - 1 <  pLab->tamL && pLab->mapa[valueY(mause) - 1 ][valueX(mause)] == ' '){
-        
-        pLab->mapa[valueY(mause)][valueX(mause)] = 'b';
-        updatePos(mause, valueY(mause) - 1, valueX(mause));        
-        achaSaida(pLab, saida, mause);        
-        updatePos(mause, valueY(mause) + 1, valueX(mause));
-        pLab->mapa[valueY(mause)][valueX(mause)] = ' ';
-    
-    }
-    
-    
-    //teste para baixo
-    //se estiver dentro do labirinto e se espaço vazio
-    if(valueY(mause) + 1 > 0 && valueY(mause) + 1 <  pLab->tamL && pLab->mapa[valueY(mause) + 1 ][valueX(mause)] == ' '){
-       
-        updatePos(mause, valueY(mause) + 1, valueX(mause));
-        achaSaida(pLab, saida, mause);
-        updatePos(mause, valueY(mause) - 1, valueX(mause));
-        pLab->mapa[valueY(mause)][valueX(mause)] = ' ';
-    
-    }
-    
-    
-    //teste para esquerda
-    //se estiver dentro do labirinto e se espaço vazio
-    if(valueX(mause) - 1 > 0 && valueX(mause) - 1 <  pLab->tamC && pLab->mapa[valueY(mause)][valueX(mause) - 1] == ' '){
-        
-        updatePos(mause, valueY(mause) , valueX(mause) - 1);
-        achaSaida(pLab, saida, mause);
-        updatePos(mause, valueY(mause) , valueX(mause) + 1);
-        pLab->mapa[valueY(mause)][valueX(mause)] = ' ';
-    
-    }
-    
-    //teste para direita
-    //se estiver dentro do labirinto e se espaço vazio
-    if(valueX(mause) + 1 > 0 && valueX(mause) + 1 <  pLab->tamC && pLab->mapa[valueY(mause)][valueX(mause) + 1] == ' '){
-        
-        updatePos(mause, valueY(mause) , valueX(mause) + 1);
-        achaSaida(pLab, saida, mause);
-        updatePos(mause, valueY(mause) , valueX(mause) - 1);
-        pLab->mapa[valueY(mause)][valueX(mause)] = ' ';
-    
-    }
+            if (valueY(mause) + 1 > 0 && valueY(mause) + 1 < pLab->tamL && pLab->mapa[valueY(mause) + 1][valueX(mause)] == ' ')
+            {
+                pLab->mapa[valueY(mause)][valueX(mause)] = 'b';
+                updateTra(pTra, i, valueY(mause) - 1, valueX(mause));
+                updatePos(mause, valueY(mause) + 1, valueX(mause));
+                i = i + 1;
+                achaSaida(pLab, saida, mause, pTra, i);
+                updatePos(mause, valueY(mause) - 1, valueX(mause));
+                pLab->mapa[valueY(mause)][valueX(mause)] = ' ';
+            }
+
+            if (valueX(mause) - 1 > 0 && valueX(mause) - 1 < pLab->tamC && pLab->mapa[valueY(mause)][valueX(mause) - 1] == ' ')
+            {
+                pLab->mapa[valueY(mause)][valueX(mause)] = 'b';
+                updateTra(pTra, i, valueY(mause) - 1, valueX(mause));
+                updatePos(mause, valueY(mause), valueX(mause) - 1);
+                i = i + 1;
+                achaSaida(pLab, saida, mause, pTra, i);
+                updatePos(mause, valueY(mause), valueX(mause) + 1);
+                pLab->mapa[valueY(mause)][valueX(mause)] = ' ';
+            }
+
+            if (valueX(mause) + 1 > 0 && valueX(mause) + 1 < pLab->tamC && pLab->mapa[valueY(mause)][valueX(mause) + 1] == ' ')
+            {
+                pLab->mapa[valueY(mause)][valueX(mause)] = 'b';
+                updateTra(pTra, i, valueY(mause) - 1, valueX(mause));
+                updatePos(mause, valueY(mause), valueX(mause) + 1);
+                i = i + 1;
+                achaSaida(pLab, saida, mause, pTra, i);
+                updatePos(mause, valueY(mause), valueX(mause) - 1);
+                pLab->mapa[valueY(mause)][valueX(mause)] = ' ';
+            }
 
             if (!(valueY(mause) == valueY(saida) && valueX(mause) == valueX(saida)))
             {

@@ -89,7 +89,7 @@ void posMause(Lab *pLab, Pos *mause){
         for(int j = 0; j < pLab->tamC; j++){
        
             if(pLab->mapa[i][j] == 'M' || pLab->mapa[i][j] == 'm'){
-                printf("posição mause L %i C %i", i, j);
+                printf("\n posição mause L %i C %i \n", i, j);
                 updatePos( mause, i, j);
                 return;
             }
@@ -103,8 +103,9 @@ void achaSaida(Lab *pLab, Pos *saida, Pos *mause){
     printf("posição atual L %i C %i \n", valueY(mause), valueX(mause));
     
     if(valueY(mause) == valueY(saida) && valueX(mause) == valueX(saida)){
-        printf("achou a saida");
-        printf("coordenadas atuais L %i C %i", valueY(mause), valueX(mause));    
+        printf("achou a saida\n");
+        printLab(pLab);
+        printf("coordenadas atuais L %i C %i \n", valueY(mause), valueX(mause));    
         
         return;
     }

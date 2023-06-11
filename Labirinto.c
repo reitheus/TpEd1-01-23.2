@@ -88,7 +88,7 @@ void printLab(Lab *pLab){// função para testes posteriormente pode ser apagada
     
    for(int i = 0; i < pLab->tamL; i++){
         for(int j = 0; j < pLab->tamC; j++){
-            if(i == pLab->tamL - 2 && j == pLab->tamC - 1){
+            if(i == pLab->tamL - 3 && j == pLab->tamC - 2){
                 printf("S");
             
             }else{

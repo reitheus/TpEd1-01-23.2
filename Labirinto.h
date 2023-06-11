@@ -3,25 +3,23 @@
 #include "Percurso.h"
 #include "Posicao.h"
 
-struct labirinto{
+typedef struct {
     char **mapa;
     int tamL;
     int tamC;
-};
-
-typedef struct labirinto Lab;
+}Lab;
 
 Lab* alocaLab(int ,int );
 
 void desalocaLab(Lab**);
 
-Lab* leLabirinto( char *opcao);
+Lab* leLabirinto(char*);
 
-void printLab(Lab *plab);
+void printLab(Lab*);
 
-void posMause(Lab *pLab, Pos *mause);//acha a posição do rato
+void posMause(Lab*, Pos*);//acha a posição do rato
 
-void achaSaida(Lab *pLab, Pos *saida, Pos *mause);
+void achaSaida(Lab*, Pos*, Pos*);
 
 void imprimePercursoNoLabirinto(Lab*);
 #endif //Labirinto.h

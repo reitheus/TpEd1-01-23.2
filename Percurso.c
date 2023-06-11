@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
- 
+
 struct percurso{
     Pos **trajeto;
     int n;

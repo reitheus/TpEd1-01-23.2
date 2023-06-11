@@ -50,34 +50,25 @@ void desalocaLab(Lab **pLab){
 //le as entradas para o labirinto
 Lab* leLabirinto(char *opcao){
     int L, C;
-    
     Lab *plab;
     char lixo;
+
     scanf("%d %d", &L, &C);
     C += 1;//soma mais pois nos arquivos de testes tem que contar o \n
-    //L++;
     scanf("%c", &lixo);//serve para eliminar os \n
     scanf("%c", opcao);//Lê a opção para imprimir
     scanf("%c", &lixo);//serve para eliminar os \n
-   // scanf("%c", &lixo);
+
 
     plab = alocaLab(L, C);
     
-  
-    
     for(int i = 0; i < L ; i++){
         for(int j = 0; j < C ; j++){
-            scanf("%c", &(plab->mapa[i][j]));
-            
+            scanf("%c", &(plab->mapa[i][j]));   
         }
-
     }
-    
     //plab->mapa[L - 2][C - 2] = 'S';//Teste para ver a saida
-
-  
     return plab;
-    
 }
 
 void printLab(Lab *pLab){// função para testes posteriormente pode ser apagada
@@ -87,11 +78,8 @@ void printLab(Lab *pLab){// função para testes posteriormente pode ser apagada
         for(int j = 0; j < pLab->tamC; j++){
        
             printf("%c", pLab->mapa[i][j]);
-            
         }
-       
     }
-
 }
 
 //acha a posição do rato no labirinto
@@ -105,48 +93,32 @@ void posMause(Lab *pLab, Pos *mause){
                 updatePos( mause, i, j);
                 return;
             }
-            
         }
-       
     }
-    
-    
-    
-
-
 }
 
 //acha a saida do labirinto
 void achaSaida(Lab *pLab, Pos *saida, Pos *mause){
     
-  
-    
     printf("posição atual L %i C %i \n", valueY(mause), valueX(mause));
     
-    //confere se a coordenada do mause é igual a da saida
     if(valueY(mause) == valueY(saida) && valueX(mause) == valueX(saida)){
         printf("achou a saida");
         printf("coordenadas atuais L %i C %i", valueY(mause), valueX(mause));    
         
         return;
-    
     }
-    
-    
+
     //teste para cima
     //se estiver dentro do labirinto e se espaço vazio
     if(valueY(mause) - 1 > 0 && valueY(mause) - 1 <  pLab->tamL && pLab->mapa[valueY(mause) - 1 ][valueX(mause)] == ' '){
         
-        plab->mapa[valueY(mause)][valueX(mause)] = 'b';
-        
-        updatePos(mause, valueY(mause) - 1, valueX(mause));
-        
-        
-        achaSaida(pLab, saida, mause);
-        
+        pLab->mapa[valueY(mause)][valueX(mause)] = 'b';
+        updatePos(mause, valueY(mause) - 1, valueX(mause));        
+        achaSaida(pLab, saida, mause);        
         updatePos(mause, valueY(mause) + 1, valueX(mause));
-        
-        plab->mapa[valueY(mause)][valueX(mause)] = ' ';
+        pLab->mapa[valueY(mause)][valueX(mause)] = ' ';
+    
     }
     
     
@@ -155,13 +127,9 @@ void achaSaida(Lab *pLab, Pos *saida, Pos *mause){
     if(valueY(mause) + 1 > 0 && valueY(mause) + 1 <  pLab->tamL && pLab->mapa[valueY(mause) + 1 ][valueX(mause)] == ' '){
        
         updatePos(mause, valueY(mause) + 1, valueX(mause));
-        
-        
         achaSaida(pLab, saida, mause);
-        
         updatePos(mause, valueY(mause) - 1, valueX(mause));
-        
-        plab->mapa[valueY(mause)][valueX(mause)] = ' ';
+        pLab->mapa[valueY(mause)][valueX(mause)] = ' ';
     
     }
     
@@ -171,12 +139,9 @@ void achaSaida(Lab *pLab, Pos *saida, Pos *mause){
     if(valueX(mause) - 1 > 0 && valueX(mause) - 1 <  pLab->tamC && pLab->mapa[valueY(mause)][valueX(mause) - 1] == ' '){
         
         updatePos(mause, valueY(mause) , valueX(mause) - 1);
-        
         achaSaida(pLab, saida, mause);
-        
         updatePos(mause, valueY(mause) , valueX(mause) + 1);
-        
-        plab->mapa[valueY(mause)][valueX(mause)] = ' ';
+        pLab->mapa[valueY(mause)][valueX(mause)] = ' ';
     
     }
     
@@ -185,26 +150,17 @@ void achaSaida(Lab *pLab, Pos *saida, Pos *mause){
     if(valueX(mause) + 1 > 0 && valueX(mause) + 1 <  pLab->tamC && pLab->mapa[valueY(mause)][valueX(mause) + 1] == ' '){
         
         updatePos(mause, valueY(mause) , valueX(mause) + 1);
-        
         achaSaida(pLab, saida, mause);
-        
         updatePos(mause, valueY(mause) , valueX(mause) - 1);
-        
-        plab->mapa[valueY(mause)][valueX(mause)] = ' ';
+        pLab->mapa[valueY(mause)][valueX(mause)] = ' ';
     
     }
-    
 
-    
     if( !(valueY(mause) == valueY(saida) && valueX(mause) == valueX(saida)) ){
-        plab->mapa[valueY(mause)][valueX(mause)] = 'x';//atribui x para os locais que o rato já passou e não teve saida
+        pLab->mapa[valueY(mause)][valueX(mause)] = 'x';//atribui x para os locais que o rato já passou e não teve saida
         return;
     
-    }
-    
-    //utilizar recursão
-    //teste
-   
+    }   
 }
 
 //imprime o labirinto

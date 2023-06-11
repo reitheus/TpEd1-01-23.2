@@ -1,15 +1,10 @@
 #ifndef PERCURSO_H
 #define PERCURSO_H
 
-typedef struct {
-    Pos **trajetos;
-    int n;
-    int tamTrajeto;
-}Per;
+typedef struct percurso Percurso;
 
-Per* alocaPer(int);
+Percurso* alocaPer(int );
+void desalocaPer(Percurso* );
+void updateTra(Percurso* , int, int, int);
 
-void desalocaPer(Per**);
-void updatePer(Per*,int,int);
-
-#endif //Percurso.h
+#endif // PERCURSO_H

@@ -1,43 +1,31 @@
-#include "Posicao.h"
-
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
+#include "posicao.h"
 
 struct posicao{
     int x;
     int y;
 };
 
-Pos* alocaPos(){
-
-    Pos *newpos = (Pos*) malloc (sizeof(Pos));
-
-    return newpos; 
+Posicao* alocaPos(){
+    Posicao* newpos = (Posicao*)malloc(sizeof(Posicao));
+    return newpos;
 }
 
-//desaloca o labirinto
-void desalocaPos(Pos **ppos){
+void desalocaPos(Posicao** ppos){
     free(*ppos);
 }
 
-
-void updatePos( Pos *posicao, int y, int x){
+void updatePos(Posicao* posicao, int y, int x){
     posicao->y = y;
     posicao->x = x;
-    
 }
 
-int valueX(Pos *posicao){
+int valueX(Posicao* posicao){
     return posicao->x;
-
 }
 
-int valueY(Pos *posicao){
+int valueY(Posicao* posicao){
     return posicao->y;
-
 }
-
-
-
-

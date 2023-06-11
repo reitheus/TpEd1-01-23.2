@@ -1,25 +1,26 @@
 #ifndef LABIRINTO_H
 #define LABIRINTO_H
-#include "Percurso.h"
-#include "Posicao.h"
 
-typedef struct {
-    char **mapa;
+typedef struct labirinto{
+    char** mapa;
     int tamL;
     int tamC;
-}Lab;
+}Labirinto;
 
-Lab* alocaLab(int ,int );
+Labirinto* alocaLab(int, int);
 
-void desalocaLab(Lab**);
+void desalocaLab(Labirinto**);
 
-Lab* leLabirinto(char*);
+Labirinto* leLabirinto(char*);
 
-void printLab(Lab*);
+int verificavazio(Labirinto*);
 
-void posMause(Lab*, Pos*);//acha a posição do rato
+void printLab(Labirinto*);
 
-void achaSaida(Lab*, Pos*, Pos*);
+void posMause(Labirinto*, Posicao*);
 
-void imprimePercursoNoLabirinto(Lab*);
-#endif //Labirinto.h
+void achaSaida(Labirinto*, Posicao*, Posicao*, Percurso*, int);
+
+void imprimePercursoNoLabirinto(Labirinto*);
+
+#endif // LABIRINTO_H

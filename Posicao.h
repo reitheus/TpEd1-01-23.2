@@ -1,16 +1,13 @@
 #ifndef POSICAO_H
 #define POSICAO_H
 
-typedef struct posicao Pos;
 
-Pos* alocaPos();
+typedef struct posicao Posicao;
 
-void desalocaPos(Pos** );
+Posicao* alocaPos();
+void desalocaPos(Posicao**);
+void updatePos(Posicao*, int, int);
+int valueX(Posicao*);
+int valueY(Posicao*);
 
-void updatePos( Pos* , int , int );
-
-int valueX(Pos*);//retorna o valor de X da struct posição
-
-int valueY(Pos*);//retorna o valor de Y da struct posição
-
-#endif //posição.h
+#endif // POSICAO_H

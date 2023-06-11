@@ -58,11 +58,11 @@ Lab* leLabirinto(char *opcao){
     Lab *plab;
     char lixo;
     scanf("%d %d", &L, &C);
-    C += 1;
+    C += 1;//soma mais pois nos arquivos de testes tem que contar o \n
     //L++;
-    scanf("%c", &lixo);
-    scanf("%c", opcao);
-    scanf("%c", &lixo);
+    scanf("%c", &lixo);//serve para eliminar os \n
+    scanf("%c", opcao);//Lê a opção para imprimir
+    scanf("%c", &lixo);//serve para eliminar os \n
    // scanf("%c", &lixo);
 
     plab = alocaLab(L, C);
@@ -77,7 +77,7 @@ Lab* leLabirinto(char *opcao){
 
     }
     
-    //plab->mapa[L - 2][C - 1] = '*';
+    plab->mapa[L - 2][C - 2] = 'S';
 
   
     return plab;

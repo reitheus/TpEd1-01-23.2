@@ -22,8 +22,8 @@ void desalocaPos(Pos **ppos){
 }
 
 
-void updatePos( Pos *posicao, int x, int y){
-    posicao->x = x;
+void updatePos( Pos *posicao, int y, int x){
     posicao->y = y;
-
+    posicao->x = x;
+    
 }

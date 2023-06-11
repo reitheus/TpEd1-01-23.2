@@ -2,16 +2,24 @@
 
 
 int main(){
-   // int linhas, colunas;
+    // int linhas, colunas;
     char opcao;
     Lab *labirinto;
+    Pos *saida, *mause;
+    saida = alocaPos();//aloca a posição ára saida
+    mause = alocaPos();//aloca uma posição para o rato
 
-    
     labirinto = leLabirinto(&opcao);
-   
-    
-    printLab(labirinto);
 
+
+    updatePos( saida, labirinto->tamL - 2, labirinto->tamC - 2);
+
+    printLab(labirinto);
+    
+    achaSaida(labirinto, saida);
+    
+    desalocaPos(&mause); 
+    desalocaPos(&saida); 
     desalocaLab(&labirinto);
     return 0;
 }

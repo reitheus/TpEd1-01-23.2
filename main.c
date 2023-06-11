@@ -16,7 +16,7 @@ int main(){
 
     printLab(labirinto);
     
-    achaSaida(labirinto, saida);
+    achaSaida(labirinto, saida, mause);
     
     desalocaPos(&mause); 
     desalocaPos(&saida); 

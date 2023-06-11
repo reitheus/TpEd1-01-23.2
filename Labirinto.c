@@ -126,6 +126,7 @@ void achaSaida(Lab *pLab, Pos *saida, Pos *mause){
     //se estiver dentro do labirinto e se espaço vazio
     if(valueY(mause) + 1 > 0 && valueY(mause) + 1 <  pLab->tamL && pLab->mapa[valueY(mause) + 1 ][valueX(mause)] == ' '){
        
+        pLab->mapa[valueY(mause)][valueX(mause)] = 'b';
         updatePos(mause, valueY(mause) + 1, valueX(mause));
         achaSaida(pLab, saida, mause);
         updatePos(mause, valueY(mause) - 1, valueX(mause));
@@ -138,6 +139,7 @@ void achaSaida(Lab *pLab, Pos *saida, Pos *mause){
     //se estiver dentro do labirinto e se espaço vazio
     if(valueX(mause) - 1 > 0 && valueX(mause) - 1 <  pLab->tamC && pLab->mapa[valueY(mause)][valueX(mause) - 1] == ' '){
         
+        pLab->mapa[valueY(mause)][valueX(mause)] = 'b';
         updatePos(mause, valueY(mause) , valueX(mause) - 1);
         achaSaida(pLab, saida, mause);
         updatePos(mause, valueY(mause) , valueX(mause) + 1);
@@ -149,6 +151,7 @@ void achaSaida(Lab *pLab, Pos *saida, Pos *mause){
     //se estiver dentro do labirinto e se espaço vazio
     if(valueX(mause) + 1 > 0 && valueX(mause) + 1 <  pLab->tamC && pLab->mapa[valueY(mause)][valueX(mause) + 1] == ' '){
         
+        pLab->mapa[valueY(mause)][valueX(mause)] = 'b';
         updatePos(mause, valueY(mause) , valueX(mause) + 1);
         achaSaida(pLab, saida, mause);
         updatePos(mause, valueY(mause) , valueX(mause) - 1);

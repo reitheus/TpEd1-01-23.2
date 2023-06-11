@@ -1,5 +1,10 @@
 #include "Labirinto.h"
-
+#include "Percurso.h"
+#include "Posicao.h"
+#inlude <stdio.h>
+#indlude <stdlib.h>
+#include <math.h>
+#indlude <string.h>
 
 int main(){
     // int linhas, colunas;

@@ -123,6 +123,7 @@ void achaSaida(Lab *pLab, Pos *saida, Pos *mause){
     
     printf("posição atual L %i C %i \n", valueY(mause), valueX(mause));
     
+    //confere se a coordenada do mause é igual a da saida
     if(valueY(mause) == valueY(saida) && valueX(mause) == valueX(saida)){
         printf("achou a saida");
         printf("coordenadas atuais L %i C %i", valueY(mause), valueX(mause));    
@@ -144,7 +145,8 @@ void achaSaida(Lab *pLab, Pos *saida, Pos *mause){
         achaSaida(pLab, saida, mause);
         
         updatePos(mause, valueY(mause) + 1, valueX(mause));
-    
+        
+        plab->mapa[valueY(mause)][valueX(mause)] = ' ';
     }
     
     
@@ -158,6 +160,8 @@ void achaSaida(Lab *pLab, Pos *saida, Pos *mause){
         achaSaida(pLab, saida, mause);
         
         updatePos(mause, valueY(mause) - 1, valueX(mause));
+        
+        plab->mapa[valueY(mause)][valueX(mause)] = ' ';
     
     }
     
@@ -171,6 +175,8 @@ void achaSaida(Lab *pLab, Pos *saida, Pos *mause){
         achaSaida(pLab, saida, mause);
         
         updatePos(mause, valueY(mause) , valueX(mause) + 1);
+        
+        plab->mapa[valueY(mause)][valueX(mause)] = ' ';
     
     }
     
@@ -183,6 +189,8 @@ void achaSaida(Lab *pLab, Pos *saida, Pos *mause){
         achaSaida(pLab, saida, mause);
         
         updatePos(mause, valueY(mause) , valueX(mause) - 1);
+        
+        plab->mapa[valueY(mause)][valueX(mause)] = ' ';
     
     }
     

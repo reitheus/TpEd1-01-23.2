@@ -27,3 +27,17 @@ void updatePos( Pos *posicao, int y, int x){
     posicao->x = x;
     
 }
+
+int valueX(Pos *posicao){
+    return posicao->x;
+
+}
+
+int valueY(Pos *posicao){
+    return posicao->y;
+
+}
+
+
+
+

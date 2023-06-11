@@ -3,6 +3,12 @@
 #include "Percurso.h"
 #include "Posicao.h"
 
+struct labirinto{
+    char **mapa;
+    int tamL;
+    int tamC;
+};
+
 typedef struct labirinto Lab;
 
 Lab* alocaLab(int ,int );

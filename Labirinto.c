@@ -77,7 +77,7 @@ Lab* leLabirinto(char *opcao){
 
     }
     
-    plab->mapa[L - 2][C - 1] = '*';
+    //plab->mapa[L - 2][C - 1] = '*';
 
   
     return plab;

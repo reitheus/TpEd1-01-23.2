@@ -28,7 +28,7 @@ Lab* alocaLab(int L,int C){
     
     for (int i = 0; i < L; i++){
         
-        (*newlab).mapa[i] = (char*)malloc(C * sizeof(char));
+        (*newlab).mapa[i] = (char*)malloc( (C+1) * sizeof(char));
         if((*newlab).mapa[i] == NULL){
             printf("Memoria insuficiente.\n");
             exit(1);
@@ -58,7 +58,7 @@ Lab* leLabirinto(char *opcao){
     Lab *plab;
     char lixo;
     scanf("%d %d", &L, &C);
-    C += L-1;
+    //C += 1;
     //L++;
     scanf("%c", &lixo);
     scanf("%c", opcao);

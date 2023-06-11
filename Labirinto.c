@@ -5,11 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct labirinto{
-    char **mapa;
-    int tamL;
-    int tamC;
-};
+
 
 //alloca o labirtinto
 Lab* alocaLab(int L,int C){

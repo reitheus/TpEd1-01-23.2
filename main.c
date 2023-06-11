@@ -13,8 +13,11 @@ int main(){
 
 
     updatePos( saida, labirinto->tamL - 2, labirinto->tamC - 2);
-
+ 
     printLab(labirinto);
+    
+    printf("\n\n");
+    posMause( labirinto, mause);
     
     achaSaida(labirinto, saida, mause);
     

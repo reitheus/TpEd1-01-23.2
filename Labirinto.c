@@ -77,7 +77,7 @@ Lab* leLabirinto(char *opcao){
 
     }
     
-    plab->mapa[L - 2][C - 2] = 'S';
+    //plab->mapa[L - 2][C - 2] = 'S';//Teste para ver a saida
 
   
     return plab;
@@ -98,17 +98,37 @@ void printLab(Lab *pLab){// função para testes posteriormente pode ser apagada
 
 }
 
-//acha a saida do labirinto
-void achaSaida(Lab *pLab){
+//acha a posição do rato no labirinto
+void posMause(Lab *pLab, Pos *mause){
     
-    Pos *saida;
-    saida = alocaPos();
-    updatePos( saida, pLab->tamC, pLab->tamL-1);
+    for(int i = 0; i < pLab->tamL; i++){
+        for(int j = 0; j < pLab->tamC; j++){
+       
+            if(pLab->[i][j] == 'M' || pLab->[i][j] == 'm'){
+                printf("posição mause L %i C %i", i, j);
+                updatePos( mause, i, j);
+                return 0;
+            }
+            
+        }
+       
+    }
+    
+    
+    
+
+
+}
+
+//acha a saida do labirinto
+void achaSaida(Lab *pLab, Pos *saida, Pos *mause){
+    
+    
     
     
     //utilizar recursão
     //teste
-    desalocaPos(&saida);
+   
 }
 
 //imprime o labirinto

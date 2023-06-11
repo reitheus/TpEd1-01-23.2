@@ -77,6 +77,7 @@ Lab* leLabirinto(char *opcao){
 
     }
     
+    plab->mapa[L - 2][C - 1] = 's';
 
   
     return plab;
@@ -88,12 +89,9 @@ void printLab(Lab *pLab){// função para testes posteriormente pode ser apagada
     
    for(int i = 0; i < pLab->tamL; i++){
         for(int j = 0; j < pLab->tamC; j++){
-            if(i == pLab->tamL - 3 && j == pLab->tamC - 2){
-                printf("S");
+       
+            printf("%c", pLab->mapa[i][j]);
             
-            }else{
-                printf("%c", pLab->mapa[i][j]);
-            }
         }
        
     }

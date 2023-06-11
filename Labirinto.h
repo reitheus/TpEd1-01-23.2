@@ -11,6 +11,8 @@ Lab* leLabirinto( char *opcao);
 
 void printLab(Lab *plab);
 
+void posMause(Lab *pLab, Pos *mause);//acha a posição do rato
+
 void achaSaida(Lab*);
 
 void imprimePercursoNoLabirinto(Lab*);

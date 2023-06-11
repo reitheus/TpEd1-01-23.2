@@ -16,7 +16,7 @@ int main(){
 
     labirinto = leLabirinto(&opcao);
 
-
+ 
     updatePos( saida, labirinto->tamL - 2, labirinto->tamC - 2);
  
     printLab(labirinto);

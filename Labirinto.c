@@ -104,7 +104,7 @@ void posMause(Lab *pLab, Pos *mause){
     for(int i = 0; i < pLab->tamL; i++){
         for(int j = 0; j < pLab->tamC; j++){
        
-            if(pLab->[i][j] == 'M' || pLab->[i][j] == 'm'){
+            if(pLab->mapa[i][j] == 'M' || pLab->mapa[i][j] == 'm'){
                 printf("posição mause L %i C %i", i, j);
                 updatePos( mause, i, j);
                 return 0;

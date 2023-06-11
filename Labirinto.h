@@ -1,5 +1,7 @@
 #ifndef LABIRINTO_H
 #define LABIRINTO_H
+#include "Percurso.h"
+#include "Posicao.h"
 
 typedef struct labirinto Lab;
 

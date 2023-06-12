@@ -5,7 +5,7 @@
 
 int main(){
     // int linhas, colunas;
-    char opcao=' ';
+    char opcao='p';
     
      
     Percurso *pTra;

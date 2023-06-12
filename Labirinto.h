@@ -26,6 +26,6 @@ void posMause(Labirinto*, Posicao* );
 
 void achaSaida(Labirinto*, Posicao* , Posicao* , Percurso* , int );
 
-void imprimePercursoNoLabirinto(Labirinto* ,Percurso* );
+Labirinto* imprimePercursoNoLabirinto(Labirinto* ,Percurso* );
 
 #endif // LABIRINTO_H

@@ -118,16 +118,17 @@ void achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, 
     if (valueY(mause) == valueY(saida) && valueX(mause) == valueX(saida))
     {
         imprimePercursoNoLabirinto(pLab,pTra);
-
         return;
     }
     else{
         do
         {
+            //teste para cima
             if (valueY(mause) - 1 > 0 && valueY(mause) - 1 < pLab->tamL && pLab->mapa[valueY(mause) - 1][valueX(mause)] == ' ')
             {
                 pLab->mapa[valueY(mause)][valueX(mause)] = 'b';
-                updateTra(pTra, i, valueY(mause) - 1, valueX(mause));
+                updateTra(pTra,pTra->n,valueX(mause),valueY(mause));
+                pTra->n +=1;
                 updatePos(mause, valueY(mause) - 1, valueX(mause));
                 i = i + 1;
                 achaSaida(pLab, saida, mause, pTra, i);
@@ -135,10 +136,12 @@ void achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, 
                 pLab->mapa[valueY(mause)][valueX(mause)] = ' ';
             }
 
+            //teste para baixo
             if (valueY(mause) + 1 > 0 && valueY(mause) + 1 < pLab->tamL && pLab->mapa[valueY(mause) + 1][valueX(mause)] == ' ')
             {
                 pLab->mapa[valueY(mause)][valueX(mause)] = 'b';
-                updateTra(pTra, i, valueY(mause) - 1, valueX(mause));
+                updateTra(pTra,pTra->n,valueX(mause),valueY(mause));
+                pTra->n +=1;
                 updatePos(mause, valueY(mause) + 1, valueX(mause));
                 i = i + 1;
                 achaSaida(pLab, saida, mause, pTra, i);
@@ -146,10 +149,12 @@ void achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, 
                 pLab->mapa[valueY(mause)][valueX(mause)] = ' ';
             }
 
+            //teste para esquerda
             if (valueX(mause) - 1 > 0 && valueX(mause) - 1 < pLab->tamC && pLab->mapa[valueY(mause)][valueX(mause) - 1] == ' ')
             {
                 pLab->mapa[valueY(mause)][valueX(mause)] = 'b';
-                updateTra(pTra, i, valueY(mause) - 1, valueX(mause));
+                updateTra(pTra,pTra->n,valueX(mause),valueY(mause));
+                pTra->n +=1;
                 updatePos(mause, valueY(mause), valueX(mause) - 1);
                 i = i + 1;
                 achaSaida(pLab, saida, mause, pTra, i);
@@ -157,10 +162,12 @@ void achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, 
                 pLab->mapa[valueY(mause)][valueX(mause)] = ' ';
             }
 
+            //teste para direita
             if (valueX(mause) + 1 > 0 && valueX(mause) + 1 < pLab->tamC && pLab->mapa[valueY(mause)][valueX(mause) + 1] == ' ')
             {
                 pLab->mapa[valueY(mause)][valueX(mause)] = 'b';
-                updateTra(pTra, i, valueY(mause) - 1, valueX(mause));
+                updateTra(pTra,pTra->n,valueX(mause),valueY(mause));
+                pTra->n +=1;
                 updatePos(mause, valueY(mause), valueX(mause) + 1);
                 i = i + 1;
                 achaSaida(pLab, saida, mause, pTra, i);
@@ -179,33 +186,33 @@ void achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, 
     }
 }
 
-void imprimePercursoNoLabirinto(Labirinto* pLab,Percurso *pTra){
+Labirinto* imprimePercursoNoLabirinto(Labirinto *plab,Percurso *pTra){
 
-    if(pLab->op == 'p' || pLab->op == 'p'){
-        for (int i = 0; i < pLab->tamL; i++){
-            for (int j = 0; i < pLab->tamC; i++){
+    if(plab->op == 'p' || plab->op == 'p'){
+        for (int i = 0; i < plab->tamL; i++){
+            for (int j = 0; j < plab->tamC; j++){
 
-                if(pLab->mapa[i][j] == 'x'){
-                    pLab->mapa[i][j] = ' ';
-                    return;
-                }else if(pLab->mapa[i][j] == 'b'){
-                    pLab->mapa[i][j] = '.';
-                    return;
-                }else{
-                    return;
+                if(plab->mapa[i][j] == 'x'){
+                    plab->mapa[i][j] = ' ';
+                    
+                }else if(plab->mapa[i][j] == 'b'){
+                    plab->mapa[i][j] = '.';
+                    pTra->n +=1;
+                    
                 }
             }
             
             
         }
-        printf("achou a saida");
-        printf("%d",pTra->n);
-        printLab(pLab);
-    }
-    if(pLab->op == 'c' || pLab->op == 'C'){
         printf("%d\n",pTra->n);
-        for(int i=0;i<pTra->n;i++){
-            printf("%d, %d\n",pTra->trajetos[i]->x,pTra->trajetos[i]->y);
+        printLab(plab);
+        
+    }else if(plab->op == 'c' || plab->op == 'C'){
+        printf("%d\n",pTra->n);
+        for(int i = 0;i < pTra->n;i++){
+            printf("%d,%d\n",pTra->trajetos[i]->x,pTra->trajetos[i]->y);
         }
+        
     }
+    return plab;
 }

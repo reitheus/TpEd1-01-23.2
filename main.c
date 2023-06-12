@@ -1,34 +1,29 @@
+#include <stdio.h>
 #include "labirinto.h"
-#include "percurso.h"
-#include "posicao.h"
+
 
 
 int main(){
     // int linhas, colunas;
-    char opcao;
-    int v;
-    Labirinto *tabuleiro;
-    Posicao *saida, *mause;
-    Percurso *pTra;
-    saida = alocaPos();//aloca a posição ára saida
-    mause = alocaPos();//aloca uma posição para o rato
-
-    tabuleiro = leLabirinto(&opcao);
-    v = verificavazio(tabuleiro);
-    pTra = alocaPer(v);
-
-    updatePos( saida, tabuleiro->tamL - 2, tabuleiro->tamC - 2);
- 
-    printLab(tabuleiro);
+    char opcao=' ';
     
+     
+    Percurso *pTra;
+    Posicao *saida = alocaPos();//aloca a posição ára saida
+    Posicao *mause = alocaPos();//aloca uma posição para o rato
+    Labirinto *pLab;
+    pLab = lelabirinto(opcao);
 
-    posMause( tabuleiro, mause);
-      
-    achaSaida(tabuleiro, saida, mause,pTra,0);
+    posMause( pLab, mause);
+ 
+    printf("\n\n");     
+    updatePos( saida, pLab->tamL - 2, pLab->tamC -2);
+    pTra = alocaPer(pLab->v);
+    achaSaida(pLab, saida, mause,pTra,0);
     
     desalocaPos(&mause); 
     desalocaPos(&saida);
     desalocaPer(&pTra);
-    desalocaLab(&tabuleiro);
+    desalocaLab(&pLab);
     return 0;
 }

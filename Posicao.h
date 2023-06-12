@@ -1,8 +1,10 @@
 #ifndef POSICAO_H
 #define POSICAO_H
 
-
-typedef struct posicao Posicao;
+typedef struct{
+    int x;
+    int y;
+}Posicao;
 
 Posicao* alocaPos();
 void desalocaPos(Posicao**);

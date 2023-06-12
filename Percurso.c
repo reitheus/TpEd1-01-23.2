@@ -4,16 +4,11 @@
 #include "percurso.h"
 #include "posicao.h"
 
-struct percurso{
-    Posicao **trajetos;
-    int n;
-    int tamTrajeto;
-};
 
 Percurso* alocaPer(int x){
     Percurso* newper = (Percurso*)malloc(sizeof(Percurso));
     newper->tamTrajeto = x;
-    newper->trajetos = (Posicao**)malloc(newper->tamTrajeto * sizeof(Posicao**));
+    newper->trajetos = (Posicao**)calloc(newper->tamTrajeto ,sizeof(Posicao**));
     for (int i = 0; i < newper->tamTrajeto; i++)
     {
         newper->trajetos[i] = alocaPos();
@@ -22,16 +17,14 @@ Percurso* alocaPer(int x){
     return newper;
 }
 
-void updateTra(Percurso* pTra, int i, int posy, int posx){
-    pTra->trajetos[i]->x = posx;
-    pTra->trajetos[i]->y = posy;
-    pTra->n += 1;
+void updateTra(Percurso *newper, int i, int posy, int posx){
+    updatePos(newper->trajetos[i],posy,posx);
 }
 
-void desalocaPer(Percurso* pTra){
-    for (int i = pTra->n - 1; i <= 0; i--){
-        desalocaPos(&(pTra->trajetos[i]));
+void desalocaPer(Percurso** pTra){
+    for (int i = (*pTra)->n; i <= 0; i--){
+        desalocaPos(&(*pTra)->trajetos[i]);
     }
-    free(pTra->trajetos);
+    free((*pTra)->trajetos);
     free(pTra);
 }

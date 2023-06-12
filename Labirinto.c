@@ -2,9 +2,6 @@
 #include <stdlib.h>
 
 #include "labirinto.h"
-#include "posicao.h"
-#include "percurso.h"
-
 
 Labirinto* alocaLab(int L, int C)
 {
@@ -45,31 +42,6 @@ void desalocaLab(Labirinto** pLab)
     free((*pLab)->mapa);
     free(*pLab);
 }
-
-Labirinto* lelabirinto(char* opcao)
-{
-    int L, C;
-    Labirinto* plab;
-    char lixo;
-
-    scanf("%d %d", &L, &C);
-    C += 1;
-    scanf("%c", &lixo);
-    scanf("%c", opcao);
-    scanf("%c", &lixo);
-
-    plab = alocaLab(L, C);
-
-    for (int i = 0; i < L; i++)
-    {
-        for (int j = 0; j < C; j++)
-        {
-            scanf("%c", &(plab->mapa[i][j]));
-        }
-    }
-    return plab;
-}
-
 int verificavazio(Labirinto* pLab)
 {
     int vazio = 0;
@@ -83,8 +55,35 @@ int verificavazio(Labirinto* pLab)
             }
         }
     }
+    pLab->v = vazio;
     return vazio;
 }
+Labirinto* lelabirinto(char opcao){
+    int L, C;
+    Labirinto* plab;
+    char lixo;
+
+    scanf("%d %d", &L, &C);
+    C += 1;
+    scanf("%c", &lixo);
+    scanf("%c", &opcao);
+    scanf("%c", &lixo);
+
+    plab = alocaLab(L, C);
+
+    for (int i = 0; i < L; i++)
+    {
+        for (int j = 0; j < C; j++)
+        {
+            scanf("%c", &(plab->mapa[i][j]));
+        }
+    }
+    plab->v = verificavazio(plab);
+    plab->op = opcao;
+    return plab;
+}
+
+
 
 void printLab(Labirinto* pLab)
 {
@@ -105,27 +104,24 @@ void posMause(Labirinto* pLab, Posicao* mause)
         {
             if (pLab->mapa[i][j] == 'M' || pLab->mapa[i][j] == 'm')
             {
-                printf("\n posição mause L %i C %i \n", i, j);
+                //printf("\n posição mause L %i C %i \n", i, j);
                 updatePos(mause, i, j);
             }
         }
     }
 }
 
-void achaSaida(Labirinto* pLab, Posicao* saida, Posicao* mause, Percurso* pTra, int i)
+void achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, int i)
 {
-    printf("posição atual L %i C %i \n", valueY(mause), valueX(mause));
+    //printf("posição atual L %i C %i \n", valueY(mause), valueX(mause));
 
     if (valueY(mause) == valueY(saida) && valueX(mause) == valueX(saida))
     {
-        printf("achou a saida\n");
-        printLab(pLab);
-        printf("coordenadas atuais L %i C %i \n", valueY(mause), valueX(mause));
+        imprimePercursoNoLabirinto(pLab,pTra);
 
         return;
     }
-    else
-    {
+    else{
         do
         {
             if (valueY(mause) - 1 > 0 && valueY(mause) - 1 < pLab->tamL && pLab->mapa[valueY(mause) - 1][valueX(mause)] == ' ')
@@ -178,11 +174,38 @@ void achaSaida(Labirinto* pLab, Posicao* saida, Posicao* mause, Percurso* pTra, 
                 return;
             }
 
-        } while (i < (*pTra)->tamTrajeto);
+
+        } while (i < pLab->v);
     }
 }
 
-void imprimePercursoNoLabirinto(Labirinto* pLab)
-{
-    // Implementação da função
+void imprimePercursoNoLabirinto(Labirinto* pLab,Percurso *pTra){
+
+    if(pLab->op == 'p' || pLab->op == 'p'){
+        for (int i = 0; i < pLab->tamL; i++){
+            for (int j = 0; i < pLab->tamC; i++){
+
+                if(pLab->mapa[i][j] == 'x'){
+                    pLab->mapa[i][j] = ' ';
+                    return;
+                }else if(pLab->mapa[i][j] == 'b'){
+                    pLab->mapa[i][j] = '.';
+                    return;
+                }else{
+                    return;
+                }
+            }
+            
+            
+        }
+        printf("achou a saida");
+        printf("%d",pTra->n);
+        printLab(pLab);
+    }
+    if(pLab->op == 'c' || pLab->op == 'C'){
+        printf("%d\n",pTra->n);
+        for(int i=0;i<pTra->n;i++){
+            printf("%d, %d\n",pTra->trajetos[i]->x,pTra->trajetos[i]->y);
+        }
+    }
 }

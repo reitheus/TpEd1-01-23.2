@@ -6,6 +6,7 @@
 typedef struct {
     Posicao **trajetos;
     int n;
+    int mcom;
     int tamTrajeto;
 }Percurso;
 

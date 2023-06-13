@@ -13,7 +13,7 @@ Percurso* alocaPer(int x){
     {
         newper->trajetos[i] = alocaPos();
     }
-    newper->n = 0;
+    newper->n=0;
     return newper;
 }
 
@@ -23,7 +23,7 @@ void updateTra(Percurso *newper, int i, int posy, int posx){
 }
 
 void desalocaPer(Percurso** pTra){
-    for (int i = (*pTra)->n; i <= 0; i--){
+    for (int i = (*pTra)->tamTrajeto; i <= 0; i--){
         desalocaPos(&(*pTra)->trajetos[i]);
     }
     free((*pTra)->trajetos);

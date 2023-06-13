@@ -20,6 +20,7 @@ int main(){
     updatePos( saida, pLab->tamL - 2, pLab->tamC -2);
     pTra = alocaPer(pLab->v);
     achaSaida(pLab, saida, mause,pTra,0);
+    imprimePercursoNoLabirinto(pLab,pTra);
     
     desalocaPos(&mause); 
     desalocaPos(&saida);

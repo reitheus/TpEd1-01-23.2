@@ -13,6 +13,7 @@ int main(){
     Posicao *saida = alocaPos();//aloca a posição ára saida
     Posicao *mause = alocaPos();//aloca uma posição para o rato
     Labirinto *pLab;
+    int achou = 0;
     pLab = lelabirinto(opcao);
 
     posMause( pLab, mause);
@@ -20,7 +21,7 @@ int main(){
     printf("\n");     
     updatePos( saida, pLab->tamL - 2, pLab->tamC -1);
     pTra = alocaPer(pLab->v);
-    achaSaida(pLab, saida, mause,pTra,1, inicio);
+    achaSaida(pLab, saida, mause,pTra,1, inicio, achou);
     pLab = imprimepercursoNolabirinto(pLab,pTra);
     
     desalocaPos(&inicio);

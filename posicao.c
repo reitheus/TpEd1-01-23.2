@@ -10,13 +10,11 @@ struct posicao{
 
 Posicao* alocaPos(){
     Posicao* newpos = (Posicao*)malloc(sizeof(Posicao));
-    printf("\nalocou pos\n");
     return newpos;
 }
 
 void desalocaPos(Posicao** ppos){
     free(*ppos);
-    printf("\ndesalocou pos\n");
 }
 
 void updatePos(Posicao* posicao, int y, int x){

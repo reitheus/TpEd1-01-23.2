@@ -115,8 +115,9 @@ void posMause(Labirinto* pLab, Posicao* mause)
     }
 }
 
-void achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, int i)
-{
+int achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, int i, Posicao *inicio)
+{   
+    int achou = 0;//se 0 não achou saida se 1 achou saida
     
     if (valueY(mause) == valueY(saida) && valueX(mause) == valueX(saida)){
         printf("achou\n");
@@ -128,7 +129,7 @@ void achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, 
             *pTra->mCaminho[j] = *pTra->trajetos[j];
             }
         }
-        return;
+        return 1;//se o rato acha a saida retorna 1
     }
     pLab->mapa[valueY(mause)][valueX(mause)] = 'b';
     
@@ -138,7 +139,7 @@ void achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, 
         updatePos(mause, valueY(mause) - 1, valueX(mause));
         
         pTra->n += 1;
-        achaSaida(pLab, saida, mause, pTra, i+1);
+        achou = achaSaida(pLab, saida, mause, pTra, i+1);
         updatePos(mause, valueY(mause) + 1, valueX(mause));
         
 
@@ -150,7 +151,7 @@ void achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, 
         updatePos(mause, valueY(mause) + 1, valueX(mause));
         updateTra(pTra,pTra->n,valueX(mause),valueY(mause));
         pTra->n += 1;
-        achaSaida(pLab, saida, mause, pTra, i + 1);
+        achou = achaSaida(pLab, saida, mause, pTra, i + 1);
         updatePos(mause, valueY(mause) - 1, valueX(mause));
         
     }
@@ -161,7 +162,7 @@ void achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, 
         updatePos(mause, valueY(mause), valueX(mause) + 1);
         updateTra(pTra,pTra->n,valueX(mause),valueY(mause));
         pTra->n += 1;
-        achaSaida(pLab, saida, mause, pTra, i + 1);
+        achou = achaSaida(pLab, saida, mause, pTra, i + 1);
         updatePos(mause, valueY(mause), valueX(mause) - 1);
         
 
@@ -174,7 +175,7 @@ void achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, 
         updatePos(mause, valueY(mause), valueX(mause) - 1);
         updateTra(pTra,pTra->n,valueX(mause),valueY(mause));
         pTra->n += 1;
-        achaSaida(pLab, saida, mause, pTra, i + 1);
+        achou = achaSaida(pLab, saida, mause, pTra, i + 1);
         updatePos(mause, valueY(mause), valueX(mause) + 1);
         
     }
@@ -182,8 +183,12 @@ void achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, 
 
     pLab->mapa[valueY(mause)][valueX(mause)] = ' ';
     
+    if( valueX(inicio) == valueX(mause) && valueY(inicio) == valueY(mause) && achou == 0){
+        printf("Epic Fail");
+        return achou;
+    }
     
-    
+    return achou;
 }
 
 Labirinto* imprimepercursoNolabirinto(Labirinto *plab,Percurso *pTra){

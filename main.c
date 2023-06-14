@@ -16,7 +16,7 @@ int main(){
     pLab = lelabirinto(opcao);
     inicio = alocaPos();
     posMause( pLab, mause);
-    updadePos(inicio, valueY(mause), valueX(mause));
+    updatePos(inicio, valueY(mause), valueX(mause));
     printf("\n");     
     updatePos( saida, pLab->tamL - 2, pLab->tamC -2);
     pTra = alocaPer(pLab->v);

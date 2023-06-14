@@ -16,11 +16,13 @@ int main(){
 
     posMause( pLab, mause);
  
-    printf("\n\n");     
+    printf("\n");     
     updatePos( saida, pLab->tamL - 2, pLab->tamC -2);
     pTra = alocaPer(pLab->v);
-    achaSaida(pLab, saida, mause,pTra,0);
-    imprimePercursoNoLabirinto(pLab,pTra);
+    printf("\nentrou recursao\n");
+    achaSaida(pLab, saida, mause,pTra,1);
+    printf("\nsaiu recursão\n");
+    pLab=imprimepercursoNolabirinto(pLab,pTra);
     
     desalocaPos(&mause); 
     desalocaPos(&saida);

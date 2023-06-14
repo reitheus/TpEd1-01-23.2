@@ -115,13 +115,17 @@ void posMause(Labirinto* pLab, Posicao* mause)
 int achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, int i,Posicao *inicio, int achou){
 
     
+    //printf("seila");
     if (valueY(mause) == valueY(saida) && valueX(mause) == valueX(saida)){
-
+	//printf("achou a saida");
         if(i < pTra->mcom){
             pTra->mcom = i;
             for(int j=0;j < pTra->mcom;j++){
+            	
                 pTra->mCaminho[j] = pTra->trajetos[j];
+            	
             }
+            
         }
         return 1;//se o rato acha a saida retorna 1
     }
@@ -167,6 +171,7 @@ int achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, i
     }
     
     pLab->mapa[valueY(mause)][valueX(mause)] = ' ';
+    //printf("fim da função");
     if( valueX(inicio) == valueX(mause) && valueY(inicio) == valueY(mause) && achou == 0){
         printf("Epic Fail\n");
         return achou;

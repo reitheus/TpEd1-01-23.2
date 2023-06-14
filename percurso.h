@@ -4,8 +4,8 @@
 #include "posicao.h"
 
 typedef struct {
-    Posicao **trajetos;
-    Posicao **mCaminho;
+    Posicao *trajetos;
+    Posicao *mCaminho;
     int n;
     int mcom;
     int tamTrajeto;

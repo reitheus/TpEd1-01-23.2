@@ -19,7 +19,7 @@ int main(){
     posMause( pLab, mause);
     updatePos(inicio, valueY(mause), valueX(mause));
     printf("\n");     
-    updatePos( saida, pLab->tamL - 2, pLab->tamC -2);
+    updatePos( saida, pLab->tamL - 2, pLab->tamC - 2);
     pTra = alocaPer(pLab->v);
     achaSaida(pLab, saida, mause,pTra,1, inicio, achou);
     pLab = imprimepercursoNolabirinto(pLab,pTra);

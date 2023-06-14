@@ -112,9 +112,9 @@ void posMause(Labirinto* pLab, Posicao* mause)
     }
 }
 
-int achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, int i,Posicao *inicio){
+int achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, int i,Posicao *inicio, int achou){
 
-    int achou=0;
+    
     if (valueY(mause) == valueY(saida) && valueX(mause) == valueX(saida)){
 
         if(i < pTra->mcom){
@@ -132,7 +132,7 @@ int achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, i
         
         updatePos(mause, valueY(mause) - 1, valueX(mause));
         updateTra(pTra,i ,valueX(mause),valueY(mause));
-        achou = achaSaida(pLab, saida, mause, pTra, i+1,inicio);
+        achou = achaSaida(pLab, saida, mause, pTra, i+1,inicio, achou);
         updatePos(mause, valueY(mause) + 1, valueX(mause));
         
 
@@ -142,7 +142,7 @@ int achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, i
         //teste para baixo
         updatePos(mause, valueY(mause) + 1, valueX(mause));
         updateTra(pTra,i ,valueX(mause),valueY(mause));
-        achou = achaSaida(pLab, saida, mause, pTra, i+1,inicio);
+        achou = achaSaida(pLab, saida, mause, pTra, i+1,inicio, achou);
         updatePos(mause, valueY(mause) - 1, valueX(mause));
         
     }
@@ -151,7 +151,7 @@ int achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, i
         //teste para direita   
         updatePos(mause, valueY(mause), valueX(mause) + 1);
         updateTra(pTra,i ,valueX(mause),valueY(mause));
-        achou = achaSaida(pLab, saida, mause, pTra, i+1,inicio);
+        achou = achaSaida(pLab, saida, mause, pTra, i+1,inicio, achou);
         updatePos(mause, valueY(mause), valueX(mause) - 1);
         
 
@@ -161,7 +161,7 @@ int achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, i
         //teste para esquerda
         updatePos(mause, valueY(mause), valueX(mause) - 1);
         updateTra(pTra,i ,valueX(mause),valueY(mause));
-        achou = achaSaida(pLab, saida, mause, pTra, i+1,inicio);
+        achou = achaSaida(pLab, saida, mause, pTra, i+1,inicio, achou);
         updatePos(mause, valueY(mause), valueX(mause) + 1);
         
     }

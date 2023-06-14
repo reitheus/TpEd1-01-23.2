@@ -24,7 +24,7 @@ void printLab(Labirinto* );
 
 void posMause(Labirinto*, Posicao* );
 
-int achaSaida(Labirinto*, Posicao* , Posicao* , Percurso* ,int ,Posicao* , int achou);
+int achaSaida(Labirinto*, Posicao* , Posicao* , Percurso* ,int ,Posicao* , int );
 
 Labirinto* imprimepercursoNolabirinto(Labirinto* ,Percurso* );
 

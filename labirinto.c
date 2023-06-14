@@ -139,7 +139,7 @@ int achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, i
         updatePos(mause, valueY(mause) - 1, valueX(mause));
         
         pTra->n += 1;
-        achou = achaSaida(pLab, saida, mause, pTra, i+1);
+        achou = achaSaida(pLab, saida, mause, pTra, i+1, inicio);
         updatePos(mause, valueY(mause) + 1, valueX(mause));
         
 
@@ -151,7 +151,7 @@ int achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, i
         updatePos(mause, valueY(mause) + 1, valueX(mause));
         updateTra(pTra,pTra->n,valueX(mause),valueY(mause));
         pTra->n += 1;
-        achou = achaSaida(pLab, saida, mause, pTra, i + 1);
+        achou = achaSaida(pLab, saida, mause, pTra, i + 1, inicio);
         updatePos(mause, valueY(mause) - 1, valueX(mause));
         
     }
@@ -162,7 +162,7 @@ int achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, i
         updatePos(mause, valueY(mause), valueX(mause) + 1);
         updateTra(pTra,pTra->n,valueX(mause),valueY(mause));
         pTra->n += 1;
-        achou = achaSaida(pLab, saida, mause, pTra, i + 1);
+        achou = achaSaida(pLab, saida, mause, pTra, i + 1, inicio);
         updatePos(mause, valueY(mause), valueX(mause) - 1);
         
 
@@ -175,7 +175,7 @@ int achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, i
         updatePos(mause, valueY(mause), valueX(mause) - 1);
         updateTra(pTra,pTra->n,valueX(mause),valueY(mause));
         pTra->n += 1;
-        achou = achaSaida(pLab, saida, mause, pTra, i + 1);
+        achou = achaSaida(pLab, saida, mause, pTra, i + 1, inicio);
         updatePos(mause, valueY(mause), valueX(mause) + 1);
         
     }

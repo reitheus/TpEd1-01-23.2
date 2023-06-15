@@ -3,8 +3,9 @@
 
 #include "labirinto.h"
 
-Labirinto* alocaLab(int L, int C)
-{
+Labirinto* alocaLab(int L, int C){
+    //função de alocação do labirinto com mensagem de erros em caso de erro    
+    
     Labirinto* newlab = (Labirinto*)malloc(sizeof(Labirinto));
     if (newlab == NULL)
     {
@@ -28,14 +29,17 @@ Labirinto* alocaLab(int L, int C)
             exit(1);
         }
     }
+    //atribuição de valores iniciais para as variaveis do TAD
     newlab->op=' ';
     newlab->tamL = L;
     newlab->tamC = C;
+    newlab->v = 0;
     return newlab;
 }
 
-void desalocaLab(Labirinto** pLab)
-{
+void desalocaLab(Labirinto** pLab){
+    //função de desaloção do labirinto
+
     for (int i = 0; i < (*pLab)->tamL; i++){
     
         free((*pLab)->mapa[i]);
@@ -43,8 +47,10 @@ void desalocaLab(Labirinto** pLab)
     free((*pLab)->mapa);
     free(*pLab);
 }
-int verificavazio(Labirinto* pLab)
-{
+
+int verificavazio(Labirinto* pLab){
+    //função de verificação da quantidade de espaços vazios
+
     int vazio = 0;
     for (int i = 0; i < pLab->tamL; i++)
     {
@@ -56,18 +62,21 @@ int verificavazio(Labirinto* pLab)
             }
         }
     }
-    pLab->v = vazio;
+
     return vazio;
 }
+
 Labirinto* lelabirinto(char opcao){
+    //leitura dos dados do labirinto
+
     int L, C;
     Labirinto* plab;
     char lixo;
 
-    scanf("%d %d", &L, &C);
-    scanf("%c", &lixo);
-    scanf("%c", &opcao);
-    scanf("%c", &lixo);
+    scanf("%d %d", &L, &C);// leitura das dimenções do labirinto
+    scanf("%c", &lixo);//eliminação do \n
+    scanf("%c", &opcao);//leitura da opção de impressão
+
     C += 1;
 
     plab = alocaLab(L, C);
@@ -79,15 +88,14 @@ Labirinto* lelabirinto(char opcao){
             scanf("%c", &(plab->mapa[i][j]));
         }
     }
-    plab->v = verificavazio(plab);
+    plab->v = verificavazio(plab);// verificação e armazenamento da quantidades de espaços vazios
     plab->op = opcao;
     return plab;
 }
 
+void printLab(Labirinto* pLab){
+    //função para imprimir o labirinto salvo
 
-
-void printLab(Labirinto* pLab)
-{
     for (int i = 0; i < pLab->tamL; i++)
     {
         for (int j = 0; j < pLab->tamC; j++)
@@ -98,12 +106,11 @@ void printLab(Labirinto* pLab)
     printf("\n");
 }
 
-void posMause(Labirinto* pLab, Posicao* mause)
-{
-    for (int i = 0; i < pLab->tamL; i++)
-    {
-        for (int j = 0; j < pLab->tamC; j++)
-        {
+void posMause(Labirinto* pLab, Posicao* mause){
+    //função para ubtenção da posição do rato
+
+    for (int i = 0; i < pLab->tamL; i++){
+        for (int j = 0; j < pLab->tamC; j++){
             if (pLab->mapa[i][j] == 'M' || pLab->mapa[i][j] == 'm')
             {
                 updatePos(mause, i, j);
@@ -113,11 +120,11 @@ void posMause(Labirinto* pLab, Posicao* mause)
 }
 
 int achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, int i,Posicao *inicio, int achou){
-
+    //função recursiva
     
-    //printf("seila");
+
     if (valueY(mause) == valueY(saida) && valueX(mause) == valueX(saida)){
-	//printf("achou a saida");
+
         if(i < pTra->mcom){
             pTra->mcom = i;
             for(int j=0;j < pTra->mcom;j++){
@@ -171,9 +178,9 @@ int achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, i
     }
     
     pLab->mapa[valueY(mause)][valueX(mause)] = ' ';
-    //printf("fim da função");
+    
     if( valueX(inicio) == valueX(mause) && valueY(inicio) == valueY(mause) && achou == 0){
-        printf("Epic Fail\n");
+        //teste para ver se não foi possivel chegar a saida
         return achou;
     }
     
@@ -181,25 +188,29 @@ int achaSaida(Labirinto* pLab, Posicao *saida, Posicao *mause, Percurso *pTra, i
 }
 
 Labirinto* imprimepercursoNolabirinto(Labirinto *plab,Percurso *pTra){
-
+    //impressão da saida de acordo com a opção de entrada
     
-     if(plab->op == 'p' || plab->op == 'p'){
+    //imprime o menor percurso feito
+    if(plab->op == 'p' || plab->op == 'p'){
         
         for (int i = 0; i < pTra->mcom; i++){
             Posicao pos = pTra->mCaminho[i];
             plab->mapa[pos.x][pos.y] = '.';
             
         }
-        printf("%d\n ",pTra->mcom);
+        printf("%d\n ",pTra->mcom+1);
         printLab(plab);
     }
+    
+    //imprime o menor caminho feito
     if(plab->op == 'c' || plab->op == 'C'){
     
-        printf("%d\n",pTra->mcom);
+        printf("%d\n",pTra->mcom+1);
         for(int i = 0;i < pTra->mcom;i++){
             Posicao pos = pTra->mCaminho[i];
             printf("%d, %d\n",pos.x,pos.y-1);
         }
+        
     }
     
     return plab;

@@ -89,9 +89,13 @@ int encontracaminho(Grafo* pGrafo, int city,int aux){
 }
 
 //Impressão da saida de acordo com a opção de entrada
-void imprimeCaminho(Grafo* pGrafo){
+
+Grafo* imprimeCaminho(Grafo* pGrafo){
     
-    printf("%d",pGrafo->ncity);
-    
+    for(int i = 0;i < pGrafo->ncity;i++);{
+        printf("%d",pGrafo->caminho[i]);
+    }
+    printf("%d",pGrafo->distancia);
+
     return pGrafo;
 }

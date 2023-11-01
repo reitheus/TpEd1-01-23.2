@@ -6,6 +6,7 @@ typedef struct grafo{
     int *caminho;// vetor do caminho
     int ncity; // numeros de cidade
     int distancia;// distanica do caminho
+
 }Grafo;
 
 //Função de alocação do grafo

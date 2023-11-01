@@ -2,13 +2,14 @@
 #define GRAFOPONDERADO_H
 
 typedef struct grafo{
-    int **mapa;
-    int *caminho;
-    int ncity;
+    int **mapa;// Matriz com as distancias
+    int *caminho;// vetor do caminho
+    int ncity; // numeros de cidade
+    int distancia;// distanica do caminho
 }Grafo;
 
 //Função de alocação do grafo
-Grafo *alocaGrafo(int );
+Grafo* alocaGrafo(int );
 
 //Função de desalocação do grafo
 void desalocaGrafo(Grafo** );
@@ -17,9 +18,9 @@ void desalocaGrafo(Grafo** );
 Grafo* leGrafo(Grafo* );
 
 //Função de encontra caminho
-int encontraCaminho(Grafo* ,int );
+int encontraCaminho(Grafo* ,int ,int );
 
 //Imprime caminho
-Grafo* imprimeCaminho(Grafo* );
+void imprimeCaminho(Grafo* );
 
 #endif //TAD Grafo Ponderado

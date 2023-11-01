@@ -28,6 +28,7 @@ Grafo* alocaGrafo(int n){
 
     newgrafo->caminho = (int*)malloc(n * sizeof(int));
     newgrafo->ncity = n;
+    newgrafo->distancia = 0;
     return newgrafo;
 }
 
@@ -63,31 +64,34 @@ Grafo* leGrafo(Grafo* pGrafo){
 }
 
 //Função recursiva
-int encontracaminho(Grafo* pGrafo, int city){
+int encontracaminho(Grafo* pGrafo, int city,int aux){
     
-
-    if(city == pGrafo->ncity){
-
-        
-        return 1;//retornou para a cidade de origem
+    
+    if(city > pGrafo->ncity){
+        if
+        return 1;
     }
     
-    for (int i = 0; i < pGrafo->ncity; i++){
-        if(i == city){
-            break;
-        }else{
-
+    
+    
+    if () {	
+        if (menorvalor > cidade[n][aux]) {
+            menorvalor = cidade[n][aux];
         }
-
-    }
+        distancia += menorvalor;
+		printf("%d ", n);
+        aux = n2;
+		menorvalor = 50000;
+        return encontraCaminho(cidade, n - 1, menorvalor, aux, n2, distancia); 
+    } 
     
     return ;
 }
 
 //Impressão da saida de acordo com a opção de entrada
-Grafo* imprimeCaminho(Grafo* pGrafo){
+void imprimeCaminho(Grafo* pGrafo){
     
-    
+    printf("%d",pGrafo->ncity);
     
     return pGrafo;
 }

@@ -5,6 +5,7 @@ typedef struct grafo{
     int **mapa;
     int *caminho;
     int ncity;
+    int distancia
 }Grafo;
 
 //Função de alocação do grafo

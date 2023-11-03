@@ -4,9 +4,9 @@
 int main(){
 
 	Grafo *pGrafo = NULL;
-    int resultado; 
-	leGrafo(pGrafo);
-    resultado = encontraCaminho(pGrafo,0);
+    int resultado;
+	pGrafo = leGrafo(pGrafo);
+    resultado = encontraCaminho(pGrafo,0,0,0);
     if(resultado == 0){
         printf("Não achou caminho");
     }else{

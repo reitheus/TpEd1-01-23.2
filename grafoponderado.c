@@ -1,7 +1,7 @@
+#include "grafoponderado.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "grafoponderado.h"
 
 //Função de alocação do labirinto com mensagem de erros em caso de erro    
 Grafo* alocaGrafo(int n){
@@ -27,75 +27,100 @@ Grafo* alocaGrafo(int n){
     }
 
     newgrafo->caminho = (int*)malloc(n * sizeof(int));
-    newgrafo->ncity = n;
     newgrafo->distancia = 0;
+    newgrafo->ncity = 0;
+    printf("Grafo Alocado\n");
     return newgrafo;
 }
 
 //Função de desaloção do labirinto
-void desalocaLab(Grafo** pGrafo){
+void desalocaGrafo(Grafo** pGrafo){
 
     free((*pGrafo)->caminho);
+    printf("vetor de caminho desalocado\n");
     for (int i = 0; i < (*pGrafo)->ncity; i++){
     
         free((*pGrafo)->mapa[i]);
     }
     free((*pGrafo)->mapa);
+    printf("Mapa desalocado\n");
     free(*pGrafo);
+    printf("grafo desalocado\n");
 
 }
 
 //Leitura dos dados do labirinto
 Grafo* leGrafo(Grafo* pGrafo){
 
-    int n;
-
+    int n,i,j,k,m;
+    i=0;
     scanf("%d",&n);
 
-    pGrafo = alocaLab(n);
-
-    for (int i = 0; i < n; i++){
-        for (int j = 0; j < n; j++){
-            scanf("%d", &(pGrafo->mapa[i][j]));
-        }
+    pGrafo = alocaGrafo(n);
+    pGrafo->ncity = n;
+    while (m < (n*n)){
+        scanf("%d %d %d",&i,&j,&k);
+        pGrafo->mapa[i][j] = k;
+        m++;
     }
-
     return pGrafo;
 }
 
 //Função recursiva
-int encontracaminho(Grafo* pGrafo, int city,int aux){
+int encontraCaminho(Grafo* pGrafo, int city,int aux,int achou){
     
-    
-    if(city > pGrafo->ncity){
-        if
+    printf("aux= %d | city= %d\n",aux,city);
+    if(aux > pGrafo->ncity){
+        printf("entrou\n");
         return 1;
     }
+    if(aux < pGrafo->ncity){
+
+        pGrafo->caminho[aux] = city;
+        printf("caminho[%d]=%d\n",aux,pGrafo->caminho[aux]);
+        city = verificamenor(pGrafo,city,&aux);
+        achou = encontraCaminho(pGrafo,city,aux+1,achou);
+    }
     
+    return achou;
     
-    
-    if () {	
-        if (menorvalor > cidade[n][aux]) {
-            menorvalor = cidade[n][aux];
+}
+
+//Função verifica menor distancia 
+int verificamenor(Grafo *pG,int cidade,int *n){
+    int aux,aux1,j;
+    aux = 9999999;
+    for(int i = 0;i < *n+1;i++){
+        j = pG->caminho[i];
+        printf("j=%d\n",j);
+        pG->mapa[cidade][j] = -1;
+    }
+    for (int i = 0; i < pG->ncity; i++){
+        for (int j = 0; j < pG->ncity; j++){
+            printf("%d ", pG->mapa[i][j]);
         }
-        distancia += menorvalor;
-		printf("%d ", n);
-        aux = n2;
-		menorvalor = 50000;
-        return encontraCaminho(cidade, n - 1, menorvalor, aux, n2, distancia); 
-    } 
-    
-    return ;
+        printf("\n");
+    }
+    printf("\n");
+    for (int i = 0; i < pG->ncity; i++){
+        if(pG->mapa[cidade][i] > -1){
+            if(pG->mapa[cidade][i] < aux){
+                aux = pG->mapa[cidade][i];
+                aux1 = i;
+            }
+        }
+    }
+    pG->distancia = pG->distancia + aux;
+    printf("distancia= %d | cidade= %d | n= %d | aux= %d | aux1= %d\n",pG->distancia,cidade,*n,aux,aux1);
+    return aux1;
 }
 
 //Impressão da saida de acordo com a opção de entrada
-
-Grafo* imprimeCaminho(Grafo* pGrafo){
+void imprimeCaminho(Grafo* pGrafo){
     
-    for(int i = 0;i < pGrafo->ncity;i++);{
+    for(int i = 0;i < pGrafo->ncity;i++){
         printf("%d",pGrafo->caminho[i]);
     }
-    printf("%d",pGrafo->distancia);
+    printf("\n%d",pGrafo->distancia);
 
-    return pGrafo;
 }

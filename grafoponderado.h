@@ -18,8 +18,11 @@ void desalocaGrafo(Grafo** );
 //Função de entrada de dados
 Grafo* leGrafo(Grafo* );
 
+//Função de achar o menor
+int verificamenor(Grafo* ,int ,int* );
+
 //Função de encontra caminho
-int encontraCaminho(Grafo* ,int ,int );
+int encontraCaminho(Grafo* ,int ,int ,int );
 
 //Imprime caminho
 void imprimeCaminho(Grafo* );

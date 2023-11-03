@@ -26,10 +26,9 @@ Grafo* alocaGrafo(int n){
         }
     }
 
-    newgrafo->caminho = (int*)malloc(n * sizeof(int));
+    newgrafo->caminho = (int*)malloc(n+1 * sizeof(int));
     newgrafo->distancia = 0;
     newgrafo->ncity = 0;
-    printf("Grafo Alocado\n");
     return newgrafo;
 }
 
@@ -37,15 +36,12 @@ Grafo* alocaGrafo(int n){
 void desalocaGrafo(Grafo** pGrafo){
 
     free((*pGrafo)->caminho);
-    printf("vetor de caminho desalocado\n");
     for (int i = 0; i < (*pGrafo)->ncity; i++){
     
         free((*pGrafo)->mapa[i]);
     }
     free((*pGrafo)->mapa);
-    printf("Mapa desalocado\n");
     free(*pGrafo);
-    printf("grafo desalocado\n");
 
 }
 
@@ -69,15 +65,12 @@ Grafo* leGrafo(Grafo* pGrafo){
 //Função recursiva
 int encontraCaminho(Grafo* pGrafo, int city,int aux,int achou){
     
-    printf("aux= %d | city= %d\n",aux,city);
-    if(aux > pGrafo->ncity){
-        printf("entrou\n");
+    if(aux >= pGrafo->ncity){
+        pGrafo->caminho[aux] = city;
         return 1;
-    }
-    if(aux < pGrafo->ncity){
+    }else if(aux < pGrafo->ncity){
 
         pGrafo->caminho[aux] = city;
-        printf("caminho[%d]=%d\n",aux,pGrafo->caminho[aux]);
         city = verificamenor(pGrafo,city,&aux);
         achou = encontraCaminho(pGrafo,city,aux+1,achou);
     }
@@ -88,39 +81,41 @@ int encontraCaminho(Grafo* pGrafo, int city,int aux,int achou){
 
 //Função verifica menor distancia 
 int verificamenor(Grafo *pG,int cidade,int *n){
-    int aux,aux1,j;
+    int aux,proxcidade,j,inicio,aux1;
+    aux1 = 0;
     aux = 9999999;
+    inicio = pG->mapa[cidade][0];
+    //tranca os lugares que ja passou
     for(int i = 0;i < *n+1;i++){
         j = pG->caminho[i];
-        printf("j=%d\n",j);
         pG->mapa[cidade][j] = -1;
     }
-    for (int i = 0; i < pG->ncity; i++){
-        for (int j = 0; j < pG->ncity; j++){
-            printf("%d ", pG->mapa[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
+    //procura a menor distancia
     for (int i = 0; i < pG->ncity; i++){
         if(pG->mapa[cidade][i] > -1){
             if(pG->mapa[cidade][i] < aux){
                 aux = pG->mapa[cidade][i];
-                aux1 = i;
+                proxcidade = i;
+                aux1 = 1;
             }
         }
     }
+    //caso final de retornar a cidade inicial
+    if (aux1 == 0){
+        aux = inicio;
+        proxcidade = 0;
+    }
+    
     pG->distancia = pG->distancia + aux;
-    printf("distancia= %d | cidade= %d | n= %d | aux= %d | aux1= %d\n",pG->distancia,cidade,*n,aux,aux1);
-    return aux1;
+    return proxcidade;
 }
 
 //Impressão da saida de acordo com a opção de entrada
 void imprimeCaminho(Grafo* pGrafo){
     
-    for(int i = 0;i < pGrafo->ncity;i++){
-        printf("%d",pGrafo->caminho[i]);
+    for(int i = 0;i < pGrafo->ncity+1;i++){
+        printf("%d ",pGrafo->caminho[i]);
     }
-    printf("\n%d",pGrafo->distancia);
+    printf("\n%d\n",pGrafo->distancia);
 
 }

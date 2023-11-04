@@ -26,9 +26,8 @@ Grafo* alocaGrafo(int n){
         }
     }
 
-    newgrafo->caminho = (int*)malloc(n+1 * sizeof(int));
+    newgrafo->caminho = (int*)malloc((n + 1) * sizeof(int));
     newgrafo->distancia = 0;
-    newgrafo->ncity = 0;
     return newgrafo;
 }
 
@@ -50,11 +49,12 @@ Grafo* leGrafo(Grafo* pGrafo){
 
     int n,i,j,k,m;
     i=0;
+    m=0;
     scanf("%d",&n);
 
     pGrafo = alocaGrafo(n);
     pGrafo->ncity = n;
-    while (m < (n*n)){
+    while (m < (n * n)){
         scanf("%d %d %d",&i,&j,&k);
         pGrafo->mapa[i][j] = k;
         m++;

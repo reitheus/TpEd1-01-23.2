@@ -26,6 +26,7 @@ Grafo* alocaGrafo(int n){
         }
     }
 
+    newgrafo->plista = alocaLista();
     newgrafo->caminho = (int*)malloc(n+1 * sizeof(int));
     newgrafo->distancia = 0;
     newgrafo->ncity = 0;
@@ -34,7 +35,8 @@ Grafo* alocaGrafo(int n){
 
 //Função de desaloção do labirinto
 void desalocaGrafo(Grafo** pGrafo){
-
+    desalocaLista((*pGrafo)->plista);
+    (*pGrafo)->plista = NULL;
     free((*pGrafo)->caminho);
     for (int i = 0; i < (*pGrafo)->ncity; i++){
     
@@ -54,11 +56,7 @@ Grafo* leGrafo(Grafo* pGrafo){
 
     pGrafo = alocaGrafo(n);
     pGrafo->ncity = n;
-    while (m < (n*n)){
-        scanf("%d %d %d",&i,&j,&k);
-        pGrafo->mapa[i][j] = k;
-        m++;
-    }
+    
     return pGrafo;
 }
 

@@ -7,25 +7,6 @@
 Grafo* alocaGrafo(int n){
     
     Grafo* newgrafo = (Grafo*)malloc(sizeof(Grafo));
-    if (newgrafo == NULL){
-        printf("Memoria insuficiente.\n");
-        exit(1);
-    }
-
-    newgrafo->mapa = (int**)malloc(n * sizeof(int*));
-    if (newgrafo->mapa == NULL){
-        printf("Memoria insuficiente.\n");
-        exit(1);
-    }
-
-    for (int i = 0; i < n; i++){
-        newgrafo->mapa[i] = (int*)malloc(n * sizeof(int));
-        if (newgrafo->mapa[i] == NULL){
-            printf("Memoria insuficiente.\n");
-            exit(1);
-        }
-    }
-
     newgrafo->plista = alocaLista();
     newgrafo->caminho = (int*)malloc(n+1 * sizeof(int));
     newgrafo->distancia = 0;

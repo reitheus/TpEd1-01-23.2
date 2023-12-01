@@ -9,7 +9,7 @@ typedef struct grafo{
 }Grafo;
 
 typedef struct item{
-    int *cidades;
+    int distancia;
     int cityatual;
 }Item;
 
@@ -19,8 +19,8 @@ typedef struct celula{
 }Celula;
 
 typedef struct lista{
-    Celula *pCabeca;
-    Celula *pUltimo;
+    struct Celula *pCabeca;
+    struct Celula *pUltimo;
 }Lista;
 
 //Função de alocação do grafo

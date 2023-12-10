@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 
+
 //Função de alocação do labirinto com mensagem de erros em caso de erro    
 Grafo* alocaGrafo(int n){
     

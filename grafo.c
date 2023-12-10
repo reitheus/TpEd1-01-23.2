@@ -1,86 +1,160 @@
-#include "grafo.h"
+#include "grafoponderado.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-//funções da biblioteca 
+Lista *alocaLista(){
 
-//função que aloca memória dinamicamente para receber os dados das cidades de acordo com o número de cidades informado 
-int **alocarGrafo(int **cidades, int n){
-	
-	cidades = (int **)malloc(n * sizeof(int *));
-    for (int i = 0; i < n; i++) {
-        cidades[i] = (int *)malloc(n * sizeof(int));
+    Lista *plista = (Lista *)malloc(sizeof(Lista));
+    if (plista != NULL) {
+        plista ->pCabeca = NULL;
+        plista ->pUltimo = NULL;
+        printf("Lista criada\n");
+    } else {
+        printf("Falha ao alocar memória para a lista\n");
     }
-    
-	return cidades; 
+    return plista;
 }
 
-//função libera memória alocada 
-int** desalocarGrafo(int **cidades, int n){
-
-	for (int i = 0; i < n; i++) {
-        free(cidades[i]);
-    }
-    free(*cidades);
-
-	return cidades;
-} 
-
-//função para ler os dados de entrada fornecidos pelo usuário 
-int **leGrafo(int **cidades, int n){
-
-	for(int i = 0; i < n; i++){
-		for(int j = 0; j < n; j++)
-		scanf("%d ", &cidades[i][j]);
-	}
-
-	return cidades; 
+int TLista_EhVazia(Lista *plista ) {
+    return (plista->pCabeca == plista->pUltimo);
 }
 
-//função recursiva que retorna o menor caminho
-int encontraCaminho(int **cidade, int n, int menorvalor, int aux, int n2, int distancia) {
+int insereLista(Lista *plista, Item x) {
+    if (plista == NULL) {
+        printf("Lista não inicializada\n");
+        return 0; // Se a lista não foi inicializada, não é possível inserir um item
+    }
 
-	if (n == -1) {
-        return distancia; 
+    Celula *novaCelula = (Celula *)malloc(sizeof(Celula));
+    if (novaCelula == NULL) {
+        printf("Falha ao alocar memória para a célula\n");
+        return 0; // Se a alocação falhar, retorna 0 indicando erro na inserção
     }
-    
-    if (aux == n) {
-        return encontraCaminho(cidade, n, menorvalor, aux-1, n2, distancia);
-    }
-    
-    if (aux < n) {	
-        if (menorvalor > cidade[n][aux]) {
-            menorvalor = cidade[n][aux];
-        }
-        return encontraCaminho(cidade, n, menorvalor, aux-1, n2, distancia);
-    }
-    
-    if (aux == 0) {	
-        if (menorvalor > cidade[n][aux]) {
-            menorvalor = cidade[n][aux];
-        }
-        distancia += menorvalor;
-		printf("%d ", n);
-        aux = n2;
-		menorvalor = 50000;
-        return encontraCaminho(cidade, n - 1, menorvalor, aux, n2, distancia); 
+
+    novaCelula->pItem = x; // pensar em quais informações estão sendo passadas e de que forma
+    novaCelula->prox = NULL;
+
+    if (TLista_EhVazia(plista)) {
+        plista->pCabeca->prox = novaCelula;
     } 
-	return distancia;	
-}
-//imprime menor caminho e a distância percorrida 
-void imprimeCaminho(int **cidades, int n, int distancia){
-	
-	//for(int i = 0; i < n; i++){
-	//	for(int j = 0; j < n; j++){
-	//		printf("%d", i );
-	//	}
-	
-	printf("\n%d", distancia );
+    else {
+        plista->pUltimo->prox = novaCelula;
+    }
+
+    plista->pUltimo = novaCelula;
+    printf("Inseriu\n");
+    return 1;
 }
 
+// Função para liberar a memória da lista
+void desalocaLista(Lista **plista ) {
+    Celula *atual = (*plista )->pCabeca;
+    while (atual != NULL) {
+        Celula *temp = atual;
+        atual = atual->prox;
+        free(temp);
+    }
+    free(*plista);
+    plista  = NULL;
+    printf("Lista desalocada\n");
+}
 
+//Remove Lista
+//void removeLista(Lista* listaC, Item x );
 
+//Função de alocação do labirinto com mensagem de erros em caso de erro    
+Grafo* alocaGrafo(int n){
+    
+    Grafo* newgrafo = (Grafo*)malloc(sizeof(Grafo));
+    newgrafo->plista = alocaLista();
+    newgrafo->caminho = (int*)malloc(n+1 * sizeof(int));
+    newgrafo->distancia = 0;
+    newgrafo->ncity = 0;
+    return newgrafo;
+}
 
+//Função de desaloção do labirinto
+void desalocaGrafo(Grafo** pGrafo){
+    desalocaLista((*pGrafo)->plista);
+    (*pGrafo)->plista = NULL;
+    free((*pGrafo)->caminho);
+    for (int i = 0; i < (*pGrafo)->ncity; i++){
+    
+        free((*pGrafo)->mapa[i]);
+    }
+    free((*pGrafo)->mapa);
+    free(*pGrafo);
 
+}
 
+//Leitura dos dados do labirinto
+Grafo* leGrafo(Grafo* pGrafo){
+
+    int n,i,j,k,m;
+    i=0;
+    scanf("%d",&n);
+
+    pGrafo = alocaGrafo(n);
+    pGrafo->ncity = n;
+    
+    return pGrafo;
+}
+
+//Função recursiva
+int encontraCaminho(Grafo* pGrafo, int city,int aux,int achou){
+    
+    if(aux >= pGrafo->ncity){
+        pGrafo->caminho[aux] = city;
+        return 1;
+    }else if(aux < pGrafo->ncity){
+
+        pGrafo->caminho[aux] = city;
+        city = verificamenor(pGrafo,city,&aux);
+        achou = encontraCaminho(pGrafo,city,aux+1,achou);
+    }
+    
+    return achou;
+    
+}
+
+//Função verifica menor distancia 
+int verificamenor(Grafo *pG,int cidade,int *n){
+    int aux,proxcidade,j,inicio,aux1;
+    aux1 = 0;
+    aux = 9999999;
+    inicio = pG->mapa[cidade][0];
+    //tranca os lugares que ja passou
+    for(int i = 0;i < *n+1;i++){
+        j = pG->caminho[i];
+        pG->mapa[cidade][j] = -1;
+    }
+    //procura a menor distancia
+    for (int i = 0; i < pG->ncity; i++){
+        if(pG->mapa[cidade][i] > -1){
+            if(pG->mapa[cidade][i] < aux){
+                aux = pG->mapa[cidade][i];
+                proxcidade = i;
+                aux1 = 1;
+            }
+        }
+    }
+    //caso final de retornar a cidade inicial
+    if (aux1 == 0){
+        aux = inicio;
+        proxcidade = 0;
+    }
+    
+    pG->distancia = pG->distancia + aux;
+    return proxcidade;
+}
+
+//Impressão da saida de acordo com a opção de entrada
+void imprimeCaminho(Grafo* pGrafo){
+    
+    for(int i = 0;i < pGrafo->ncity+1;i++){
+        printf("%d ",pGrafo->caminho[i]);
+    }
+    printf("\n%d\n",pGrafo->distancia);
+
+}
 

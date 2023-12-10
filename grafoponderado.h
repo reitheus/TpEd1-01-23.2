@@ -1,6 +1,9 @@
 #ifndef GRAFOPONDERADO_H
 #define GRAFOPONDERADO_H
 
+#include "lista.h"
+#include <stdbool.h>
+
 typedef struct grafo{
     int *caminho;// vetor do caminho
     int ncity; // numeros de cidade
@@ -8,35 +11,8 @@ typedef struct grafo{
     Lista *plista;
 }Grafo;
 
-typedef struct item{
-    int distancia;
-    int cityatual;
-}Item;
-
-typedef struct celula{
-    Item *pItem;
-    Celula *prox;
-}Celula;
-
-typedef struct lista{
-    struct Celula *pCabeca;
-    struct Celula *pUltimo;
-}Lista;
-
 //Função de alocação do grafo
 Grafo* alocaGrafo(int );
-
-//Aloca lista
-Lista *alocaLista();
-
-//Desalocacão de lista
-void desalocaLista(Lista** );
-
-//Inicia lista
-void insereLista(Lista* ,Item );
-
-//Remove Lista
-void removeLista(Lista* ,Item );
 
 //Função de desalocação do grafo
 void desalocaGrafo(Grafo** );
@@ -52,11 +28,5 @@ int encontraCaminho(Grafo* ,int ,int ,int );
 
 //Imprime caminho
 void imprimeCaminho(Grafo* );
-
-//Função de ordenação 
-void ordenaLista(Lista* );
-
-//Função imprimi ordenação 
-void imprimeOrdenado(Lista* );
 
 #endif //TAD Grafo Ponderado

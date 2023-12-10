@@ -1,4 +1,5 @@
 #include "grafoponderado.h"
+#include "lista.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -19,11 +20,6 @@ void desalocaGrafo(Grafo** pGrafo){
     desalocaLista((*pGrafo)->plista);
     (*pGrafo)->plista = NULL;
     free((*pGrafo)->caminho);
-    for (int i = 0; i < (*pGrafo)->ncity; i++){
-    
-        free((*pGrafo)->mapa[i]);
-    }
-    free((*pGrafo)->mapa);
     free(*pGrafo);
 
 }

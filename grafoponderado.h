@@ -9,6 +9,7 @@ typedef struct grafo{
     int ncity; // numeros de cidade
     int distancia;// distanica do caminho
     Lista *plista;
+    Lista *pLFinal;
 }Grafo;
 
 //Função de alocação do grafo

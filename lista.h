@@ -10,7 +10,7 @@ typedef struct item{
 
 typedef struct celula{
     Item pItem;
-    struct celula *prox;
+    struct celula *prox;  
 }Celula;
 
 typedef struct lista{
@@ -29,9 +29,6 @@ bool insereLista(Lista *,Item );
 
 //verifica se a lista é vazia
 bool TLista_EhvVazia(Lista *);
-
-//Remove Lista
-void removeLista(Lista* ,Item );
 
 //Função de ordenação 
 void ordenaLista(Lista* );

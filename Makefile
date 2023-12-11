@@ -1,6 +1,6 @@
-all: main.o grafoponderado.o
+all: main.o grafoponderado.o lista.o
 	@gcc main.o grafoponderado.o lista.o -o exe
-	rm *.o -r
+	@rm *.o -r
 main.o: main.c
 	@gcc main.c -c -Wall
 grafoponderado.o: grafoponderado.c

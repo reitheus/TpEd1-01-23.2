@@ -109,9 +109,9 @@ int verificamenor(Grafo *pG,int cidade,int *n){
 void imprimeCaminho(Grafo* pGrafo){
     
     Celula *aux = pGrafo->pLFinal->pCabeca->prox;
-    printf("Melhor Distancia: ");
+    printf("Melhor distancia: ");
     printf("%d\n",pGrafo->distancia);
-    printf("Melhor Caminho: ");
+    printf("Melhor caminho: ");
     while(aux != NULL){
         printf("%d ",aux->pItem.cityatual);
         aux = aux->prox;

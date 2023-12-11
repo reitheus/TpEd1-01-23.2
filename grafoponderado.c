@@ -68,41 +68,68 @@ int encontraCaminho(Grafo* pGrafo, int city,int aux,int achou){
     }else if(aux < pGrafo->ncity){
 
         insereLista(pGrafo->pLFinal,x);
-        city = verificamenor(pGrafo,city,&aux);
+        city = verificamenor(pGrafo,city,aux);
         achou = encontraCaminho(pGrafo,city,aux+1,achou);
     }
     return achou;
     
 }
 
-//Função verifica menor distancia 
-int verificamenor(Grafo *pG,int cidade,int *n){
-
+int verificamenor(Grafo *pG, int cidade, int n) {
     Celula *aux = pG->plista[cidade]->pCabeca->prox;
     Celula *aux1 = pG->pLFinal->pCabeca->prox;
-    if(*n < pG->ncity-1){
+    imprimeOrdenado(pG->pLFinal);
 
-        while(aux1 != NULL){
-            if (aux->pItem.cityatual == aux1->pItem.cityatual){
+    // Verifica se já percorreu todas as cidades
+    if (n < pG->ncity - 1) {
+        while (aux1 != NULL) {
+            if (aux != NULL && aux1->pItem.cityatual == aux->pItem.cityatual) {
                 aux = aux->prox;
-            }else if(aux->prox != NULL && aux->pItem.distancia > aux->prox->pItem.distancia){
+            } else if (aux != NULL && aux->prox != NULL && aux->pItem.distancia > aux->prox->pItem.distancia) {
                 aux = aux->prox;
-            }else if(aux->prox != NULL && aux->pItem.distancia < aux->prox->pItem.distancia){
-                aux1 = aux1->prox;
-            }else if(aux->prox == NULL){
-                aux1 = aux1->prox;
+            } else if (aux != NULL && aux->prox != NULL && aux->pItem.distancia < aux->prox->pItem.distancia) {
+                if (cidadeJaVisitada(pG, aux->pItem.cityatual)) {
+                    // Ignora cidade já visitada
+                    aux = aux->prox;
+                } else {
+                    aux1 = aux1->prox;
+                }
+            } else {
+                if (aux != NULL) {
+                    aux1 = aux1->prox;
+                } else {
+                    // Verificação para evitar um possível acesso indevido
+                    break;
+                }
             }
         }
-    }else{
-        while(aux != NULL){
+    } else {
+        while (aux != NULL) {
             if(aux->pItem.cityatual == 0){
                 pG->distancia = pG->distancia + aux->pItem.distancia;
                 return aux->pItem.cityatual;
+            }else{
+                aux = aux->prox;
             }
         }
     }
+    
     pG->distancia = pG->distancia + aux->pItem.distancia;
     return aux->pItem.cityatual;
+}
+
+// Função auxiliar para verificar se a cidade já foi visitada
+int cidadeJaVisitada(Grafo *pG, int cidade) {
+    Celula *aux1 = pG->pLFinal->pCabeca->prox;
+
+    while (aux1 != NULL) {
+        if (aux1->pItem.cityatual == cidade) {
+            return 1;  // Cidade já visitada
+        }
+        aux1 = aux1->prox;
+    }
+
+    return 0;  // Cidade ainda não visitada
 }
 
 //Impressão da saida de acordo com a opção de entrada

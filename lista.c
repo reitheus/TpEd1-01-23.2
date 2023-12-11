@@ -45,10 +45,12 @@ void desalocaLista(Lista** plista ) {
     *plista  = NULL;
 }
 
-//função para ordenar as listas de adjacências 
+// função para ordenar as listas de adjacências 
 void ordenaLista(Lista *pLista) {
-    Celula *atual = pLista->pCabeca;
+    Celula *atual = pLista->pCabeca->prox;  // Pular o nó cabeça fictício
     Celula *ordenado = NULL;
+
+    pLista->pCabeca->prox = NULL;  // Resetar a lista original
 
     while (atual != NULL) {
         Celula *prox = atual->prox;
@@ -72,15 +74,18 @@ void ordenaLista(Lista *pLista) {
     }
 
     // Atualiza a cabeça e o último da lista original
-    pLista->pCabeca = ordenado;
-    pLista->pUltimo = atual; // última célula permanece a mesma
+    pLista->pCabeca->prox = ordenado;
+    // Ajusta pUltimo para apontar para o último elemento
+    while (pLista->pUltimo->prox != NULL) {
+        pLista->pUltimo = pLista->pUltimo->prox;
+    }
 }
 
-//função para imprimir as listas de adjacências ordenadas  
-void imprimeOrdenado(Lista* pLista){
-    Celula *aux = pLista->pCabeca;
-    while(aux->prox != NULL){
-        printf("(%d, %d) -> ",aux->pItem.cityatual,aux->pItem.distancia);
+// função para imprimir as listas de adjacências ordenadas  
+void imprimeOrdenado(Lista* pLista) {
+    Celula *aux = pLista->pCabeca->prox;  // Pular o nó cabeça fictício
+    while (aux != NULL) {
+        printf("(%d, %d) -> ", aux->pItem.cityatual, aux->pItem.distancia);
         aux = aux->prox;
     }
     printf("NULL \n");

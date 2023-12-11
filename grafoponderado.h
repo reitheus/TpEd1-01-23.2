@@ -1,12 +1,15 @@
 #ifndef GRAFOPONDERADO_H
 #define GRAFOPONDERADO_H
 
+#include "lista.h"
+#include <stdbool.h>
+
 typedef struct grafo{
-    int **mapa;// Matriz com as distancias
     int *caminho;// vetor do caminho
     int ncity; // numeros de cidade
     int distancia;// distanica do caminho
-
+    Lista **plista;
+    Lista *pLFinal;
 }Grafo;
 
 //Função de alocação do grafo

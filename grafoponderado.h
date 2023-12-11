@@ -22,7 +22,9 @@ void desalocaGrafo(Grafo** );
 Grafo* leGrafo(Grafo* );
 
 //Função de achar o menor
-int verificamenor(Grafo* ,int ,int* );
+int verificamenor(Grafo* ,int ,int );
+
+int cidadeJaVisitada(Grafo *,int );
 
 //Função de encontra caminho
 int encontraCaminho(Grafo* ,int ,int ,int );

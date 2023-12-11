@@ -1,3 +1,4 @@
+
 all: main.o grafoponderado.o lista.o
 	@gcc main.o grafoponderado.o lista.o -o exe
 	@rm *.o -r

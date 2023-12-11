@@ -12,10 +12,10 @@ Grafo* alocaGrafo(int n){
     for (int i = 0; i < n; i++){
         newgrafo->plista[i] = alocaLista();
     }
+
     newgrafo->pLFinal = alocaLista();
     newgrafo->caminho = (int*)malloc(n * sizeof(int));
     newgrafo->distancia = 0;
-    newgrafo->ncity = 0;
     return newgrafo;
 }
 

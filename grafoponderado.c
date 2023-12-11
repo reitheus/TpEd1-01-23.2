@@ -78,7 +78,6 @@ int encontraCaminho(Grafo* pGrafo, int city,int aux,int achou){
 int verificamenor(Grafo *pG, int cidade, int n) {
     Celula *aux = pG->plista[cidade]->pCabeca->prox;
     Celula *aux1 = pG->pLFinal->pCabeca->prox;
-    imprimeOrdenado(pG->pLFinal);
 
     // Verifica se já percorreu todas as cidades
     if (n < pG->ncity - 1) {

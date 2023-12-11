@@ -36,4 +36,6 @@ void ordenaLista(Lista* );
 //Função imprimi ordenação 
 void imprimeOrdenado(Lista* );
 
+void imprimeAdjacencias(Lista* ,int );
+
 #endif//lista.h

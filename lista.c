@@ -2,64 +2,86 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// função para criar a lista
 Lista *alocaLista(){
 
     Lista *plista = (Lista *)malloc(sizeof(Lista));
-    if (plista != NULL) {
-        plista ->pCabeca = NULL;
-        plista ->pUltimo = NULL;
-        printf("Lista criada\n");
-    } else {
+    if (plista == NULL) {
         printf("Falha ao alocar memória para a lista\n");
-    }
+    } 
+    plista->pCabeca = (Celula*)malloc(sizeof(Celula));
+    plista->pCabeca->prox = NULL;
+    plista->pUltimo = plista->pCabeca;
+    
     return plista;
 }
 
+// função que verifica se a lista está vazia 
 bool TLista_EhVazia(Lista *plista ) {
     return (plista->pCabeca == plista->pUltimo);
 }
 
-bool insereLista(Lista *plista, Item x) {
-    if (plista == NULL) {
-        printf("Lista não inicializada\n");
-        return true; // Se a lista não foi inicializada, não é possível inserir um item
-    }
-
-    Celula *novaCelula = (Celula *)malloc(sizeof(Celula));
-    if (novaCelula == NULL) {
-        printf("Falha ao alocar memória para a célula\n");
-        return 0; // Se a alocação falhar, retorna 0 indicando erro na inserção
-    }
-
-    novaCelula->pItem = x; // pensar em quais informações estão sendo passadas e de que forma
-    novaCelula->prox = NULL;
-
-    if (TLista_EhVazia(plista)) {
-        plista->pCabeca->prox = novaCelula;
-    } 
-    else {
-        plista->pUltimo->prox = novaCelula;
-    }
-
-    plista->pUltimo = novaCelula;
-    printf("Inseriu\n");
-    return false;
+//função para inserir itens na lista encadeada 
+bool insereLista(Lista *pLista, Item x) {
+    Celula* nova = (Celula*) malloc(sizeof(Celula));
+    if (nova == NULL)
+        return false;
+    nova->prox = NULL;
+    nova->pItem = x;
+    pLista->pUltimo->prox = nova;
+    pLista->pUltimo = nova;
+    return true;
 }
 
 // Função para liberar a memória da lista
-void desalocaLista(Lista **plista ) {
-    Celula *atual = (*plista )->pCabeca;
+void desalocaLista(Lista** plista ) {
+    Celula *atual = (*plista)->pCabeca, *aux;
     while (atual != NULL) {
-        Celula *temp = atual;
-        atual = atual->prox;
-        free(temp);
+        aux = atual->prox;
+        free(atual);
+        atual = aux;
     }
-    free(*plista);
-    plista  = NULL;
-    printf("Lista desalocada\n");
+    free((*plista));
+    *plista  = NULL;
 }
 
-//Remove Lista
-//void removeLista(Lista* listaC, Item x );
+//função para ordenar as listas de adjacências 
+void ordenaLista(Lista *pLista) {
+    Celula *atual = pLista->pCabeca;
+    Celula *ordenado = NULL;
 
+    while (atual != NULL) {
+        Celula *prox = atual->prox;
 
+        if (ordenado == NULL || atual->pItem.distancia < ordenado->pItem.distancia) {
+            // Insere no início da lista ordenada
+            atual->prox = ordenado;
+            ordenado = atual;
+        } else {
+            // Procura o local adequado na lista ordenada
+            Celula *anterior = ordenado;
+            while (anterior->prox != NULL && atual->pItem.distancia >= anterior->prox->pItem.distancia) {
+                anterior = anterior->prox;
+            }
+            // Insere na posição correta
+            atual->prox = anterior->prox;
+            anterior->prox = atual;
+        }
+
+        atual = prox;
+    }
+
+    // Atualiza a cabeça e o último da lista original
+    pLista->pCabeca = ordenado;
+    pLista->pUltimo = atual; // última célula permanece a mesma
+}
+
+//função para imprimir as listas de adjacências ordenadas  
+void imprimeOrdenado(Lista* pLista){
+    Celula *aux = pLista->pCabeca;
+    while(aux->prox != NULL){
+        printf("(%d, %d) -> ",aux->pItem.cityatual,aux->pItem.distancia);
+        aux = aux->prox;
+    }
+    printf("NULL \n");
+}

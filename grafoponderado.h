@@ -8,7 +8,7 @@ typedef struct grafo{
     int *caminho;// vetor do caminho
     int ncity; // numeros de cidade
     int distancia;// distanica do caminho
-    Lista *plista;
+    Lista **plista;
     Lista *pLFinal;
 }Grafo;
 

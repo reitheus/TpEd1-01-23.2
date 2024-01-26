@@ -1,21 +1,11 @@
-#include "grafoponderado.h"
-#include <stdio.h>
+#include "arvore.h"
 
-int main(){
+int main (){
 
-	Grafo *pGrafo = NULL;
-    int resultado;
-	pGrafo = leGrafo(pGrafo);
-    resultado = encontraCaminho(pGrafo,0,0,0);
-    if(resultado == 0){
-        printf("Não achou caminho");
-    }else{
-
-	    imprimeCaminho(pGrafo); 
+    Arvore *pArvore;
+    while{
+        
     }
-	desalocaGrafo(&pGrafo);
-	return 0;
+
+    return 0;
 }
-
-
-

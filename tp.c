@@ -14,7 +14,7 @@ int main (){
             le(&pArvore,n);
             break;
         case 2: // impressão dos dados
-            printf("Dados inOrden:\n");
+            printf("Dados inOrder:\n");
             printInOrden(pArvore);
             break;
         case 0: // encerrado o programa

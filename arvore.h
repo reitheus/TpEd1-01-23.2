@@ -3,11 +3,15 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+#define RED 1
+#define BLACK 0
 
 typedef struct chave{
-    char idade;
+    int idade;
     char nome[51];
-    char dNascimento[11];
 }Chave;
 
 
@@ -19,18 +23,25 @@ typedef struct no{
     Chave item;
 }No;
 
-typedef struct No* Arvore;
+typedef No* Arvore;
 
-Arvore alocaArvore();
+void alocaArvore(No** );
 
-void liberaArvore(Arvore** );
+void liberaArvore(No** );
 
-void le(Arvore* ,char );
+No* noCria(Chave* );
 
-void imprimeArvore(Arvore* );
+void le(No** ,int );
 
-void rotacaoEsquerda(No** ,No* );
+void insere (No** ,Chave );
 
-void rotacaoDireita(No** ,No* );
+No* balanceamento(No* ,No* );
+
+void printInOrden(No* );
+
+No* rotacaoEsquerda(No* ,No* );
+
+No* rotacaoDireita(No* ,No* );
+
 
 #endif //arvore.h

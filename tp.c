@@ -3,18 +3,18 @@
 
 int main (){
 
-    Arvore *pArvore = alocarArvore();
-    char op,n;
+    Arvore pArvore; 
+    alocaArvore(&pArvore);
+    int op,n;
     do{
-        scanf("%c",&op);
-        switch (op)
-        {
+        scanf("%d",&op);
+        switch (op){
         case 1:
             scanf("%d",&n);
-            le(pArvore,n);
+            le(&pArvore,n);
             break;
         case 2:
-            imprimeArvore(pArvore);
+            printInOrden(pArvore);
             break;
         case 0:
             break;

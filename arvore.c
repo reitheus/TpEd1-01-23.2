@@ -1,11 +1,14 @@
 #include "arvore.h"
 
+
 void alocaArvore(No **arvore) {
+    //Função de Alocação
     *arvore = NULL;
     
 }
 
 void liberaArvore(No **ppRaiz){
+    //Função de desalocação
     if((*ppRaiz) != NULL){
         liberaArvore(&(*ppRaiz)->esq);
         liberaArvore(&(*ppRaiz)->dir);
@@ -14,9 +17,10 @@ void liberaArvore(No **ppRaiz){
     }
 }
 
-No* noCria(Chave *dado){
+No* noCria(Chave dado){
+    //Função de criação de novo no
     No *novoNo = (No*) malloc(sizeof(No));
-    novoNo->item = *dado;
+    novoNo->item = dado;
     novoNo->pai = NULL;
     novoNo->dir = NULL;
     novoNo->esq = NULL;
@@ -25,6 +29,7 @@ No* noCria(Chave *dado){
 }
 
 void le(No** ppRaiz, int n) {
+    //Função de leitura dos dados para inserção
     Chave x; 
     for (int i = 0; i < n; i++) {
         scanf("%s",x.nome);
@@ -33,127 +38,81 @@ void le(No** ppRaiz, int n) {
     }
 }
 
-No* rotacaoEsquerda (No *ppRaiz,No *x){
-    No* pAux = x->dir;
-    x->dir = pAux->esq;
-    if(pAux->esq != NULL){
-        pAux->esq->pai = x;
-    }
-    pAux->pai = x->pai;
-    if(x->pai == NULL){
-        ppRaiz = pAux;
-    }else if(x == x->pai->esq){
-        x->pai->esq = pAux;
-    }else{
-        x->pai->dir = pAux;
-    }
-    pAux->esq = x;
-    x->pai = pAux;
-    return ppRaiz;
+void rotacaoDireita(No **ppRaiz){
+    //Função de rotação para a direita
+    No *x, *y;
+    y = *ppRaiz;                    //variavel auxiliar
+    x = y->esq;                     //variavel auxiliar
+    y->esq = x->dir;                //no esquerdo da raiz recebe o no filho da direita do no a esquerda da raiz
+    x->dir = y;                     //no filho da direita do no a esquerda da raiz recebe a raiz
+    x->cor = y->cor;                //no da esquerda da raiz recebe a cor da raiz
+    y->cor = RED;                   //muda a cor da raiz para vermelho
+    *ppRaiz = x;                    //ponteiro da raiz recebe o no que foi rodado
 }
 
-No* rotacaoDireita(No *ppRaiz,No *y){
-    No* pAux = y->esq;
-    y->esq = pAux->dir;
-    if(pAux->dir != NULL){
-        pAux->dir->pai = y;
-    }
-    pAux->pai = y->pai;
-    if(y->pai == NULL){
-        ppRaiz = pAux;
-    }else if(pAux == pAux->pai->esq){
-        pAux->pai->esq = pAux;
-    }else{
-        pAux->pai->dir = pAux;
-    }
-    pAux->esq = y;
-    y->pai = pAux;
-    return ppRaiz;
+void rotacaoEsquerda(No **ppRaiz){
+    //função de rotação da esquerda analogo a rotação da direita
+    No *x, *y;
+    y = *ppRaiz;
+    x = y->dir;
+    y->dir = x->esq;
+    x->esq = y;
+    x->cor = y->cor;
+    y->cor = RED;
+    *ppRaiz = x;
 }
 
-No* balanceamento(No* ppRaiz,No* novoN){
-    No* y = NULL;
-    while(novoN->pai != NULL && novoN->pai->cor == RED){
-        if(novoN->pai == novoN->pai->pai->esq){
-            y = novoN->pai->pai->dir;
-            if(y->cor == RED){
-                //caso 1: cor do pai do pai da direita do novo no é vermelho
-                novoN->pai->cor = BLACK;
-                y->cor = BLACK;
-                novoN->pai->pai->cor = RED;
-                novoN = novoN->pai->pai;
-            }else{
-                if(novoN == novoN->pai->dir){
-                    //caso 2: novo no é igual ao pai da direita
-                    novoN = novoN->pai;
-                    ppRaiz = rotacaoEsquerda(ppRaiz,novoN);
-                }
-                //caso 3: a cor do pai do novo no é preta
-                novoN->pai->cor = BLACK;
-                novoN->pai->pai->cor = RED;
-                ppRaiz = rotacaoDireita(ppRaiz,novoN->pai->pai);
-            }
-        }else{
-            y = novoN->pai->pai->esq;
-            if(y != NULL && y->cor == RED){
-                //caso 1: cor do pai do pai da direita do novo no é vermelho
-                novoN->pai->cor = BLACK;
-                y->cor = BLACK;
-                novoN->pai->pai->cor = RED;
-                novoN = novoN->pai->pai;
-            }else{
-                if(novoN == novoN->pai->dir){
-                    //caso 2: novo no é igual ao pai da direita
-                    novoN = novoN->pai;
-                    ppRaiz = rotacaoDireita(ppRaiz,novoN);
-                }
-                //caso 3: a cor do pai do novo no é preta
-                novoN->pai->cor = BLACK;
-                novoN->pai->pai->cor = RED;
-                ppRaiz = rotacaoEsquerda(ppRaiz,novoN->pai->pai);
-            }
-        }
+int eh_vermelho(No* pNo){
+    //função de verificação da cor do no
+    if(pNo == NULL)
+        return 0;
+    
+    return pNo->cor == RED ? 1 : 0;
+}
+
+void balanceamento(No **ppRaiz,Chave dado){
+    //função de inserçao e balanceamento
+    if((*ppRaiz) == NULL){                                                  //verifica se o no atual é nulo e pode ser inserido
+        *ppRaiz = noCria(dado);
+        return;
     }
-    if(ppRaiz != NULL){
-        ppRaiz->cor = BLACK;
+
+    if(dado.idade < (*ppRaiz)->item.idade){                                 //verifica para qual lado ir da árvore
+        (*ppRaiz)->pai = (*ppRaiz)->esq;
+        balanceamento(&(*ppRaiz)->esq,dado);
     }
-    return ppRaiz;
+    if(dado.idade > (*ppRaiz)->item.idade){
+        (*ppRaiz)->pai = (*ppRaiz)->dir;
+        balanceamento(&(*ppRaiz)->dir,dado);
+    }
+
+    //verificação das propiedades
+    if(eh_vermelho((*ppRaiz)->dir) && !eh_vermelho((*ppRaiz)->esq)){        //caso 1: no da direita é vermelho e o no da esquerda não é
+        rotacaoEsquerda(ppRaiz);
+    }
+    if(eh_vermelho((*ppRaiz)->esq) && eh_vermelho((*ppRaiz)->esq->esq)){    //caso 2:os dois nos a esquerda sao vermelhos
+        rotacaoDireita(ppRaiz);
+    }
+    if(eh_vermelho((*ppRaiz)->esq) && eh_vermelho((*ppRaiz)->dir)){         //caso 3: ambos os nos são vermelhos
+        inverteCor(*ppRaiz);
+    }
 }
 
 void insere(No **ppRaiz,Chave dado){
-    No *newNo = noCria(&dado);
-    No *x = *ppRaiz;
-    No *y = NULL;
-    while (x != NULL)
-    {
-        y = x;
-        if(dado.idade < x->item.idade){
-            x = x->esq;
-        }else{
-            x = x->dir;
-        }
-    }
-    
-    newNo->pai = y;
-    if(y == NULL){
-        (*ppRaiz) = newNo;
-    }else if(dado.idade < y->item.idade){
-        y->esq = newNo;
-    }else if(dado.idade > y->item.idade){
-        y->dir = newNo;
-    }else{
-        if(strcmp(dado.nome,y->item.nome) < 0){
-            y->esq = newNo;
-        }else{
-            y->dir = newNo;
-        }
-    }
-    newNo->cor = RED;
-    *ppRaiz = balanceamento(*ppRaiz,newNo);
+    //Função de inserção
+    balanceamento(ppRaiz,dado);                 //chamada da recusividade
+    (*ppRaiz)->cor = BLACK;                     //garantia da raiz sempre ser preta;
+}
+
+void inverteCor(No *pNo){
+    //Função de troca de cor
+    pNo->cor = RED;
+    pNo->dir->cor = BLACK;
+    pNo->esq->cor = BLACK;
 }
 
 void printInOrden(No *pRaiz){
-    //No *aux = pRaiz;
+    //Função de imprenssão dos dados da arvore em ordem crescente
     if(pRaiz == NULL){
         return;
     }else{
@@ -163,5 +122,3 @@ void printInOrden(No *pRaiz){
         printInOrden(pRaiz->dir);
     }
 }
-
-

@@ -9,17 +9,18 @@ int main (){
     do{
         scanf("%d",&op);
         switch (op){
-        case 1:
+        case 1: // insersão de dados na arvore
             scanf("%d",&n);
             le(&pArvore,n);
             break;
-        case 2:
+        case 2: // impressão dos dados
+            printf("Dados inOrden:\n");
             printInOrden(pArvore);
             break;
-        case 0:
+        case 0: // encerrado o programa
             break;
-        default:
-            printf("selecione umas das opções: 1, 2 ou 0");
+        default:// caso de entrado invalida os comando errado
+            printf("Selecione umas das opções: 1 - inserir, 2 - imprimir ou 0 - sair");
             printf("\n");
             break;
         }

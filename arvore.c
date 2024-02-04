@@ -1,3 +1,5 @@
+#include "arvore.h"
+
 void rotacaoEsquerda (No **ppRaiz,No *x){
     No* pAux = x->dir;
     x->dir = pAux->esq;
@@ -23,7 +25,7 @@ void rotacaoDireita(No **ppRaiz,No *y){
         pAux->dir->pai = y;
     }
     pAux->pai = y->pai;
-    if(x->pai == NULL){
+    if(y->pai == NULL){
         *ppRaiz = pAux;
     }else if(pAux == pAux->pai->esq){
         pAux->pai->esq = pAux;
